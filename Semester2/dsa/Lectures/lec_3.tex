@@ -1,0 +1,116 @@
+\chapter{Stack}
+\label{chap:stack}
+
+\section{Properties of stack}
+\label{sec:properties-of-stack}
+
+Stack is an \textbf{Abstract Data Type}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg2.png}
+  \caption{Visualization of Stack}
+  \label{fig:pimg1-visualization-of-stack}
+\end{figure}
+
+\section{Properties of Stack}
+\label{sec:properties-of-stack}
+
+\begin{enumerate}
+  \item \textbf{Last In First Out} \(\rightarrow\) In the
+    \autoref{fig:pimg1-visualization-of-stack}, recently added item is at the
+    top of the stack and it is removed first.
+  \item One end of a stack- towards the top, is open.
+\end{enumerate}
+
+\section{Applications of Stack}
+\label{sec:applications-of-stack}
+\begin{enumerate}
+  \item Undo Operation in a word-processor
+  \item Checking if a number is palindrome
+  \item Reversing a sequence
+  \item Factorial
+  \item Recursion
+  \item Function Calls in Programming Languages
+\end{enumerate}
+
+\section{Operations of Stack}
+\label{sec:operations-of-stack}
+\textbf{Push}: New Item is added on top of the stack.\\
+\mintinline{python}{push(item)}\\
+\textbf{Pop}: The recently addeed item is removed from the stack.\\
+\mintinline{python}{pop()->item}\\
+\textbf{Peek}: See what is recently added.\\
+\mintinline{python}{peek()->item}\\
+\textbf{Is Empty}: Check if the stack has no element.\\
+\mintinline{python}{isempty()->bool}\\
+\textbf{Is Full}: (In term of Memory) has the stack used up all the allocoted
+memory to it?\\
+\mintinline{python}{isfull()->bool}\\
+\textbf{Size}: \(\#\) of elements in the stack\\
+\mintinline{python}{size()->int}\\
+
+\newpage
+\section{Stack Implementation}
+\label{sec:stack-impl}
+
+\begin{listing}[H]
+  \inputminted{python}{Code/stack.py}
+  \caption{Implementation of a stack}
+  \label{lst:stack-impl}
+\end{listing}
+
+\section{Application of Stack: Algebriac Expressions}
+\label{sec:app-stack-algebriac-expressions}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg3.png}
+  \caption{Operations: Operands and Operator}
+  \label{fig:pimg3-operations-operands-and-operator}
+\end{figure}
+
+\subsection{Postfix}
+\label{ssec:postfix}
+Operands are written first then operator is written.
+\begin{eg}
+  \(52+\)
+\end{eg}
+\subsection{Prefix}
+\label{ssec:prefix}
+Operator are written first then operands are written.
+\begin{eg}
+  \(+52\)
+\end{eg}
+\subsection{Infix}
+\label{ssec:infix}
+\begin{eg}
+  \(5+2\)
+\end{eg}
+Operator is written in between the operands.
+
+\subsection{Conversion}
+\label{ssec:conversion}
+Take expression \(a+b\).
+First step is to bracket the expression: \((a+b)\)
+
+\paragraph{Infix to Prefix}
+We move the operator to before the bracket: \(+ab\)
+
+\paragraph{Infix to Postfix}
+We move the operator to after the bracket: \(ab+\)
+
+\begin{eg}[\(a+b*c\)]
+  Apply the BODMAS rule to put brackets: \[(a+(b*c))\]
+  \textbf{To prefix}:
+  \(+a*bc\)\\
+  \textbf{To postfix}:
+  \(abc*+\)
+\end{eg}
+
+\begin{eg}[\((a+b)*c-d+e\)]
+  Apply the BODMAS rule to put brackets: \[(((a+b)*c)-(d+e))\]
+  \textbf{To prefix}:
+  \(-*+abc+de\)\\
+  \textbf{To postfix}:
+  \( ab+c*de+- \)
+\end{eg}

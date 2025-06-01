@@ -1,0 +1,102 @@
+\chapter{Linear and Binary Search}
+\label{chap:linear-and-binary-search}
+
+\section{Linear Search}
+\label{sec:linear-search}
+
+\begin{problem}[Linear Search]
+  For a given list of items, find a target item 
+  and locate where it is.
+\end{problem}
+
+\begin{algorithm}
+  \KwData{arr: list of items\\target: item to locate}
+  \KwResult{index of target if found (first instance) else -1}
+  \Begin{
+    \For{\(i=0\) \KwTo len(arr)}{
+      \If{arr[i]\(==\)target}{
+        \Return{i}
+      }  
+    }
+    \Return{-i}
+  }
+  \caption{Linear Search Algorithm}
+  \label{linear-search-algorithm}
+\end{algorithm}
+
+\subsection{Time Complexity of Linear Search}
+\label{ssec:time-complexity-of-linear-search}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Notation&Complexity\\
+    \hline
+    \(\Omega\)&1\\
+    \(O\)&\(n\)\\
+    \hline
+  \end{tabular}
+  \caption{Time Complexity of Linear Search}
+  \label{tab:time-complexity-of-linear-search}
+\end{table}
+
+\begin{listing}[htbp]
+  \inputminted{python}{Code/linear_search.py}
+  \caption{Linear Search Implementation}
+  \label{linear-search-implementation}
+\end{listing}
+
+\section{Binary Search}
+\label{sec:binary-search}
+
+\begin{problem}[Binary Search]
+  For a given list of sorted items,
+  find a target item and locate where it is.
+\end{problem}
+
+\begin{algorithm}
+  \KwData{arr: list of items\\target: item to locate}
+  \KwResult{index of target if found (first instance) else -1}
+  \Begin{
+    low, high \(\leftarrow\) 0, len(arr)-1\;
+    mid \(\leftarrow\) (low+high)//2\;
+    \While{low \(\le \) high}{
+      \If{arr[mid]\(<\)target}{
+        high = mid\;
+        mid = (low+high)//2\;
+      }
+      \ElseIf{arr[mid]>target}{
+        low = mid\;
+        mid = (low+high)//2\;
+      }
+      \Else{
+        \Return{mid}\;
+      }
+    }
+    \Return{-1}\;
+  }
+  \caption{Binary Search Algorithm}
+  \label{binary-search-algorithm}
+\end{algorithm}
+
+\subsection{Time Complexity of Binary Search}
+\label{ssec:time-complexity-of-binary-search}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Notation&Complexity\\
+    \hline
+    \(\Omega\)&1\\
+    \(O\)&\(\log_2{n}\)\\
+    \hline
+  \end{tabular}
+  \caption{Time Complexity of Binary Search}
+  \label{tab:time-complexity-of-linear-search}
+\end{table}
+
+\begin{listing}[htbp]
+  \inputminted{python}{Code/binary_search.py}
+  \caption{Binary Search Implementation}
+  \label{linear-search-implementation}
+\end{listing}

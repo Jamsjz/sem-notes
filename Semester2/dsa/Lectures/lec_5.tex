@@ -1,0 +1,86 @@
+\chapter{Queue}
+\label{chap:queue}
+
+\section{Properties of queue}
+\label{sec:properties of queue}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg4.png}
+  \caption{Queue Visualization}
+  \label{fig:pimg4-queue-visualization}
+\end{figure}
+
+\begin{enumerate}
+  \item \textbf{First In First Out}
+  \item Both end of a queue is open.
+\end{enumerate}
+
+\section{Application of Queue}
+\label{sec:application-of-queue}
+\begin{itemize}
+  \item Hospital, Canteen queue
+  \item \textbf{CPU scheduling} for processes
+  \item Railway System for simulating train.
+  \item Simulation
+\end{itemize}
+
+\section{Operations on Queue}
+\label{sec:operations-on-queue}
+\begin{itemize}
+  \item \textbf{deque}: Take out element which came first.
+  \item \textbf{enqueue}: Insert element at the last of the queue.
+  \item \textbf{isEmpty}: Check if the queue is empty.
+  \item \textbf{isFull}: is the queue full in terms of memory.
+  \item \textbf{peek}: See what element will be dequed.
+\end{itemize}
+
+\section{Queue Implementation}
+\label{sec:queue-implementation}
+The following is the implementation of queue data structure in \textbf{Python}.
+\begin{listing}[H]
+  \inputminted{python}{Code/queue.py}
+  \caption{Queue Implementation}
+  \label{lst:queue-implementation}
+\end{listing}
+
+\section{Circular Queue}
+\label{sec:circular-queue}
+
+A circular queue is an extended version of a standard queue where the last
+element is connected to the first, forming a circular structure. This design
+efficiently utilizes the queue's storage space by allowing elements to wrap
+around from the end to the beginning of the underlying array.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg5.png}
+  \caption{Circular Queue}
+  \label{fig:pimg5-circular-queue}
+\end{figure}
+
+\subsection{Key Characteristics and Components}
+A circular queue typically uses:
+\begin{itemize}
+  \item An underlying array (or list in Python) of a fixed size (\textbf{maxSize} or \textbf{k} or \textbf{capacity}) to store the queue elements.
+  \item Two pointers:
+    \begin{itemize}
+      \item \textbf{FRONT} (or \textbf{head}): Tracks the first element of the queue.
+      \item \textbf{REAR} (or \textbf{tail}): Tracks the last element of the queue.
+    \end{itemize}
+  \item \textbf{Initialization}: Initially, both \textbf{FRONT} and \textbf{REAR} are often set to -1 to indicate an empty queue.
+\end{itemize}
+
+\subsection*{Operations}
+The primary operations of a circular queue include:
+
+\subsubsection*{Enqueue (Adding an element)}
+\subsubsection*{Dequeue (Removing an element)}
+\subsubsection*{Front (Peek)}
+\subsubsection*{isFull}
+\subsubsection*{isEmpty}
+
+\section{Priority Queue}
+\label{sec:priority-queue}
+Each element has different priority. The item with highest priority is dequeued
+first. Other than that, everything is same as queue.

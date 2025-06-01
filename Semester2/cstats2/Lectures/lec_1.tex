@@ -1,0 +1,153 @@
+\chapter{Random Variable} \label{chap:random-variable}
+
+\section{Introduction to Random Variable}
+\label{sec:introduction-to-random-variable}
+
+\begin{definition}[Random Experiment]
+  \label{def:random-experiment} A random experiment in
+  probability refers to any well-defined procedure that
+  produces uncertain outcomes when repeated under identical
+conditions.  \end{definition}
+
+\begin{definition}[Sample Space] \label{def:sample-space}
+  Sample Space denoted by \(\Omega\) is the set of all
+possible event denoted by \(\xi\).  \end{definition}
+
+\begin{definition}[Random Variable]
+  \label{def:random-variable} Random Variable denoted by
+  \(X\) is a function that maps the elements in \(\Omega\)
+  i.e the \textbf{Domain of Random Variable} denoted by:\\
+  \(D_X=\{\xi \in \Omega | X(\xi)=x_k, x_k \in R_X\}\) to a
+  number in \(\R\). It can assume many values and these
+  values that a Random Variable can assume are in the
+  \textbf{Range of the Random Variable} denoted by:\\
+  \(R_{X} = \{x_1,x_2,x_3,\ldots| x_k=X(\xi_k)\}\).  So, the
+inverse function \(X^{-1}(x_k)=\xi_k\).  \end{definition}
+\begin{figure}[h] \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg1.png}
+  \caption{Random Variable Sample Space Mapping}
+  \label{fig:random-variable-sample-space-mapping}
+\end{figure}
+
+
+A random variable may be continuous or discrete.
+
+\begin{note} \(\#\) means no. of something.  \end{note}
+
+\section{Cumulative Distribution Function}
+\label{sec:cumulative-distribution-function}
+
+\begin{definition}[Cumulative Distribution Function (CDF)]
+  \label{def:cumulative-distribution-function} CDF denoted
+  by \(F_X\) is given by:\\ 
+  \begin{equation}
+    \label{eqn:cumulative-distribution-function}
+    \begin{displaystyle} \forall x \in  \R\text{, }F_X(x) =
+    P[X\le x] \end{displaystyle} 
+  \end{equation} It is an
+  increasing function i.e, \(x<y \iff F_X(x)<F_X(y)\).
+\end{definition}
+
+\section{Discrete Random Variable}
+\label{sec:discrete-random-variable} For a Discrete Random
+Variable \(X\), \(R_X\) is a finite or countable infinite
+set.
+
+\begin{definition}[Probability Mass Function (PMF)]
+  \label{def:probability-mass-function} PMF denoted by
+  \(P_X\) is given by:\\ 
+  \begin{equation}
+    \label{eqn:probability-mass-function}
+    \begin{displaystyle} P_X(x) = P[X=x]
+    \end{displaystyle}
+  \end{equation} It gives the
+  probability that \(X\) assumes the value \(x\).
+\end{definition}
+
+.\\[4pt] The implication of this is that the CDF for
+Discrete Random Variable is given by:
+\begin{equation}
+  \label{eqn:cdf-discrete-random-variable}
+  \begin{displaystyle} F_X(x) = P[X\le x_n] =
+    \sum_{k=1}^{n} P_X(x_k) =  \sum_{k=1}^{n} P[X=x_k]
+  \end{displaystyle}
+\end{equation}
+
+Then, 
+\begin{corollary}[\(P(a<X\le b) = F_X(b) - F_X(a)\)]
+  \label{cor:probability-formula-cdf}|\\Here,\\ Take the
+  equation from probability addition theorem,\\
+  \begin{equation}
+    \label{eqn:probability-addition-theorem}
+    \begin{displaystyle}
+      P(X\le a) + P(a < X \le  b) = P(X\le b)
+    \end{displaystyle}
+    \end{equation} \[
+    \text{or, } P(a < X \le  b) = 
+  P(X\le b) - P(X\le a) \]
+  \[ \text{or, } P(a < X \le  b) = F_X(b) - F_X(a)\\ \]
+  From Above, one can prove the following:
+  \begin{enumerate}
+    \item \(P(a \le X \le b) = F_X(b) - F_X(a)+P[X=a]\)
+    \item \(P(a \le X <  b) = F_X(b) - F_X(a)+P[X=a]-P[X=b]\)
+    \item \(P(a < X <  b) = F_X(b) - F_X(a)-P[X=b]\) 
+  \end{enumerate}
+\end{corollary}
+
+\section{Continuous Random Variable}
+\label{sec:continuous-random-variable} For a Continuous
+Random Variable \(X\), \(R_X\) is an uncountable infinite
+set.  The probability at a point is 0 i.e:\\
+\(P(X=x) = 0\).
+
+For continuous random variable, the probability can only
+be calculated at a given interval. The probability:
+\begin{equation}
+  \label{eqn:prob-continuous-random-variable-interval}
+  \begin{displaystyle} 
+    P[a<x<b]=\int_{a}^{b} f_X(x)dx
+  \end{displaystyle} 
+\end{equation}
+where,\\
+\(f_X(x)\) is the probability density function such that:
+
+\begin{equation}
+  \label{eqn:relation-btw-cdf-pdf}
+  \begin{displaystyle} 
+    f_{X}(x) = F_X'(x)
+  \end{displaystyle}
+\end{equation}
+
+\section{Expectation of a Random Variable}
+\label{sec:expectation-of-a-random-variable}
+
+The Expectation of a Random Variable denoted by \(E(X)\)
+is the expected value of X that is most likely to
+occur on average. So, it is also the mean of a random
+variable denoted by \(\mu\) and is given by:
+\[
+  E(X) = \mu = \sum{xP_X(x)} = \sum{xP(X=x)}
+.\]
+
+The expectation of constant is the constant itself.
+\[ E(a)=a \] 
+
+\subsection{Linearity of Expectation}
+\label{ssec:linearity-of-expectation}
+Expectation if Linear i.e for random variables \(X\), \(A\)
+and \(B\).
+\begin{enumerate}
+  \item \(E(A+B) = E(A) + E(B)\)
+  \item \(E(aA) = aE(A)\)
+\end{enumerate}
+
+\section{Variance of a Random Variable}
+\label{sec:variance-of-a-random-variable}
+
+The Variance of a random variable, denoted by \(Var(X)\) is
+the Expectation of the square of the deviation of values
+from the mean of the random variable in question and is
+given by:
+\[
+  Var(X) = E((X-\mu)^{2}) = E(X^2) - E(x)^{2}
+.\] 

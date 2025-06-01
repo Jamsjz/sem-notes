@@ -1,0 +1,135 @@
+\lecture{4}{26 May. 14:18}{Fourth Lecture}
+
+\subsubsection{Infix to Postfix Conversion Implementation}
+Consider the relative precedence of operations according to \textbf{BODMAS}
+rule. 
+
+\begin{enumerate}
+  \item \textbf{Initialize} an empty stack for operators, \(S\), and an empty output string (or list) for the postfix expression, \(P\).
+  \item \textbf{Scan} the infix expression \(E\) from left to right, one symbol at a time.
+  \item \textbf{For each symbol \(t\) in \(E\):}
+    \begin{enumerate}
+      \item If \(t\) is an \textbf{operand} (letter or digit), append \(t\) to \(P\).
+      \item If \(t = (\), push \(t\) onto \(S\).
+      \item If \(t = )\), pop and append all operators from \(S\) to \(P\) until a left parenthesis \((\) is encountered. Pop and discard the left parenthesis.
+      \item If \(t\) is an \textbf{operator} (\(+\), \(-\), \(*\), \(/\), \(^\)):
+        \begin{enumerate}
+          \item While \(S\) is not empty, and the operator at the top of \(S\) has greater or equal precedence than \(t\) (and is not a left parenthesis), pop from \(S\) and append to \(P\).
+          \item Push \(t\) onto \(S\).
+        \end{enumerate}
+    \end{enumerate}
+  \item \textbf{After scanning} the entire infix expression, pop and append any remaining operators from \(S\) to \(P\).
+  \item The output \(P\) is the postfix expression.
+\end{enumerate}
+
+\textbf{We define functions to handle precedence prehand and functions for handling expressions.}
+
+\begin{listing}[H]
+  \inputminted{python}{Code/expressions.py}
+  \caption{Expressions Handling}
+  \label{lst:postfix-eval-exp-handl}
+\end{listing}
+
+\begin{algorithm}[H]
+  \caption{Infix to Postfix Conversion}
+  \label{algo:infix-2-postfix-conversion}
+  \KwIn{Infix expression \(E\)}
+  \KwOut{Postfix expression \(P\)}
+
+  Initialize an empty stack \(S\)\;
+  Initialize an empty output string \(P\)\;
+  \For{each token \(t\) in \(E\) (from left to right)}{
+    \eIf{\(t\) is an operand}{
+      Append \(t\) to \(P\)\;
+    }{
+      \eIf{\(t = (\)}{
+        Push \(t\) onto \(S\)\;
+      }{
+        \eIf{\(t = )\)}{
+          \While{top of \(S \neq (\)}{
+            Pop from \(S\) and append to \(P\)\;
+          }
+          Pop \((\) from \(S\)\;
+        }{
+          \While{\(S\) is not empty \textbf{and} precedence(\(t\)) \(\leq\) precedence(top of \(S\)) \textbf{and} top of \(S \neq (\)}{
+            Pop from \(S\) and append to \(P\)\;
+          }
+          Push \(t\) onto \(S\)\;
+        }
+      }
+    }
+  }
+  \While{\(S\) is not empty}{
+    Pop from \(S\) and append to \(P\)\;
+  }
+  \Return \(P\)\;
+\end{algorithm}
+
+\begin{listing}[H]
+  \inputminted{python}{Code/infix_to_postfix.py}
+  \caption{Infix to Postfix Conversion}
+  \label{lst:infix-2-postfix-conversion}
+\end{listing}
+
+
+\subsection{Postfix Evaluation}
+
+\begin{enumerate}
+  \item Scan the expression from left to right until we encounter any operator.
+  \item Perform the operation
+  \item replace the expression with its computed value.
+  \item Repeat the steps from \textbf{1} to \textbf{3} until no more
+    operators exist.
+\end{enumerate}
+
+\begin{algorithm}
+  \KwData{exp: Expression to evaluate}
+  \KwResult{Result of evaluation of the expression}
+  \Begin{
+    stack \(\leftarrow\) empty stack\;
+    \For{char \emph{in} exp}{
+      \eIf{char is operator}{
+        a \(\leftarrow\) stack.pop()\;
+        b\(\leftarrow\)stack.pop()\;
+        \(o \leftarrow \text{char}\)\;
+        push a operated(\(o\)) on b to stack\;
+      }{
+        push char to stack\;
+      }
+    }
+    \Return{pop stack}
+  }
+  \caption{Postfix Evaluation}
+  \label{algo:postfix-eval}
+\end{algorithm}
+
+\begin{eg}
+  Postfix Expression: \(34*25*+\)
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+      \hline
+      Input&Stack&Action\\
+      \hline
+      \(34*25*+\)&empty&Push 3\\
+      \(4*25*+\)&3&Push 4\\
+      \(*25*+\)&3,4& Pop 3, 4. Perform \(3*4\). Push 12\\
+      \(25*+\)&12&Push(2)\\
+      \(5*+\)&12, 2& Push 5\\
+      \(*+\)&12, 2, 5&Pop 2, 5. Perform \(2*5\), Push 10\\
+      \(+\)&12, 10&Pop 12, 10. Perform \(12+10\), Push 22\\
+           &22&22 is the evaluation.\\
+           \hline
+    \end{tabular}
+  \end{table}
+\end{eg}
+
+\subsubsection{Postfix Evaluation Implementation}
+We have previously made a \href{sec:stack-impl}{Stack}. We have used the helper
+functions made previously. Then the function for evaluating postfix expression is defined.
+
+\begin{listing}[H]
+  \inputminted{python}{Code/eval_postfix.py}
+  \caption{Postfix Evaluation}
+  \label{lst:postfix-eval}
+\end{listing}

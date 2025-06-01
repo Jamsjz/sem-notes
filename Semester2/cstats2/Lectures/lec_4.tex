@@ -1,0 +1,203 @@
+\chapter{Geometric Distribution}
+\label{chap:geometric-distribution}
+\lecture{4}{2 Jun. 01:21}{Fourth Lecture}
+
+\subsection{Introduction}
+\label{ssec:introduction-geometric-distribution}
+
+\begin{eg}
+  In \href{sec:head-tail-experiment}{HTE}, each trial is a
+  \href{def:bernoulli-process}{Bernoulli Trial}.
+  Let's say we toss the coin \(k\) times before we get our first head (success).
+  Then, there are \(k\) failures and 1 success.
+  So, the probability of tossing the coin \(k\) times before our first head is:
+  \[ P[X=k] = q^{k}p\]
+  Here, \(X\) is a \href{def:random-variable}{Random Variable} that models the
+  \(\#\) trials before our first success. (i.e., number of failures)
+\end{eg}
+
+\section{Definition}
+\label{sec:definition-geometric-distribution}
+
+\begin{definition}
+  A \textbf{Geometric Distribution} models the number of successive, independent \href{def:bernoulli-process}{Bernoulli trials} required to achieve the first success, or alternatively, the number of failures before the first success. Let \(p\) be the probability of success on any given trial, and \(q = 1-p\) be the probability of failure.
+
+  There are two common parameterizations:
+  \begin{enumerate}
+    \item The random variable \(X\) represents the number of failures
+      \textit{before} the first success. The support of \(X\) is \(\{0, 1, 2,
+      \dots\}\).\\
+      \textbf{\(X\sim \text{Geom}(p)\) }
+    \item The random variable \(Y\) represents the number of trials \textit{until} (and including) the first success. The support of \(Y\) is \(\{1, 2, 3, \dots\}\).
+      \textbf{\(Y\sim \text{Geom}(p)\) }
+  \end{enumerate}
+  It is clear that \(Y = X+1\).
+
+\end{definition}
+
+\section{\href{def:probability-mass-function}{PMF} of Geometric Distribution}
+\label{sec:pmf-of-geometric-distribution}
+For the random variable \(X\) that represents the number of failures before we get
+the first success (support \(x \in \{0, 1, 2, \dots\}\)):
+\begin{equation}
+  \label{eqn:pmf-geometric-X}
+  \boxed{P[X=x] = (1-p)^{x}p = q^{x}p}
+\end{equation}
+
+For the random variable \(Y\) that represents the number of trials to get the first success (support \(y \in \{1, 2, 3, \dots\}\)):
+\begin{equation}
+  \label{eqn:pmf-geometric-Y}
+  \boxed{P[Y=y] = (1-p)^{y-1}p = q^{y-1}p}
+\end{equation}
+
+\section{\href{def:cumulative-distribution-function}{CDF} of Geometric
+Distribution}
+\label{sec:cdf-of-geometric-distribution}
+
+For \(X\) (number of failures before first success, \(x \ge 0\)):\\
+The CDF is \(F_X(x) = P[X \le x]\).
+\begin{align*}
+  P[X \le x] &= \sum_{k=0}^{x} P[X=k] \\
+             &= \sum_{k=0}^{x} q^k p \\
+             &= p \sum_{k=0}^{x} q^k \\
+             &= p \left( \frac{1-q^{x+1}}{1-q} \right) \\
+             &= p \left( \frac{1-q^{x+1}}{p} \right) \\
+             &= 1 - q^{x+1}
+\end{align*}
+So,
+\begin{equation}
+  \label{eqn:cdf-geometric-X}
+  \boxed{F_X(x) = P[X \le x] = 1 - q^{x+1}, \quad \text{for } x = 0, 1, 2, \dots}
+\end{equation}
+
+For \(Y\) (number of trials until first success, \(y \ge 1\)):
+The CDF is \(F_Y(y) = P[Y \le y]\).
+\begin{align*}
+  P[Y \le y] &= \sum_{k=1}^{y} P[Y=k] \\
+             &= \sum_{k=1}^{y} q^{k-1} p \\
+             &= p \sum_{k=1}^{y} q^{k-1} \\
+             & \text{Let } j = k-1, \text{ then the sum becomes } \sum_{j=0}^{y-1} q^j \\
+             &= p \left( \frac{1-q^{(y-1)+1}}{1-q} \right) \\
+             &= p \left( \frac{1-q^{y}}{p} \right) \\
+             &= 1 - q^{y}
+\end{align*}
+Alternatively, using \(Y=X+1\):
+\(P[Y \le y] = P[X+1 \le y] = P[X \le y-1] = 1 - q^{(y-1)+1} = 1 - q^y\).
+So,
+\begin{equation}
+  \label{eqn:cdf-geometric-Y}
+  \boxed{F_Y(y) = P[Y \le y] = 1 - q^{y}, \quad \text{for } y = 1, 2, 3, \dots}
+\end{equation}
+
+\section{\href{sec:expectation-of-a-random-variable}{Expectation} of Geometric Distribution}
+\label{sec:expectation-of-geometric-distribution}
+
+For \(X\) (number of failures before first success):\\
+We use the identity \(\sum_{k=0}^{\infty} p^k = \frac{1}{1-p}\) for \(|p|<1\).
+
+Differentiating with respect to \(x\):
+\[\sum_{k=1}^{\infty} kp^{k-1} = \frac{1}{(1-p)^2}\]
+
+Multiplying by \(p\):
+\[\sum_{k=1}^{\infty} kp^k = \frac{p}{(1-p)^2}\]
+
+Since the \(k=0\) term is \(0 \cdot p^0 = 0\), this is also
+\[\sum_{k=0}^{\infty} kp^k = \frac{p}{(1-x)^2}\]
+
+Now,
+\begin{align*}
+  E[X] &= \sum_{x=0}^{\infty} x P[X=x] \\
+       &= \sum_{x=0}^{\infty} x q^x p \\
+       &= p \sum_{x=0}^{\infty} x q^x \\
+       &= p \left( \frac{q}{(1-q)^2} \right) \\
+       &= p \left( \frac{q}{p^2} \right) \\
+       &= \frac{q}{p}
+\end{align*}
+
+\begin{equation}
+  \label{eqn:expectation-geometric-X}
+  \boxed{\therefore E[X] = \frac{q}{p} = \frac{1-p}{p}}
+\end{equation}
+
+For \(Y\) (number of trials until first success):
+Derivation (substitute \(Y=X+1\)):
+\begin{align*}
+  E[Y] &= E[X+1] \\
+       &= E[X] + E[1] \\
+       &= \frac{q}{p} + 1 \\
+       &= \frac{q+p}{p} \\
+       &= \frac{1}{p}
+\end{align*}
+Alternatively, using PMF of Y:
+\begin{align*}
+  E[Y] &= \sum_{y=1}^{\infty} y P[Y=y] \\
+       &= \sum_{y=1}^{\infty} y q^{y-1} p \\
+       &= p \sum_{y=1}^{\infty} y q^{y-1} \\
+       &= p \left( \frac{1}{(1-q)^2} \right) \quad \text{(using the derivative identity from above)} \\
+       &= p \left( \frac{1}{p^2} \right) \\
+       &= \frac{1}{p}
+\end{align*}
+
+\begin{equation}
+  \label{eqn:expectation-geometric-Y}
+  \boxed{\therefore E[Y] = \frac{1}{p}}
+\end{equation}
+
+\section{\href{def:variance-of-a-random-variable}{Variance} of Geometric Distribution}
+\label{sec:variance-of-geometric-distribution} % Corrected label
+
+For \(X\) (number of failures before first success):
+
+We know,\\
+\[Var(X) = E[X^2] - (E[X])^2\]
+
+We have,
+\[\sum_{k=0}^{\infty} p p^k = \frac{p}{(1-p)^2}\]
+
+Differentiating with respect to \(p\): 
+\begin{align*}
+  \sum_{k=1}^{\infty} k^2 p^{k-1} &= \frac{d}{dp} \left( \frac{p}{(1-p)^2}
+  \right)\\ 
+                                  &= \frac{1+p}{q^{3}}\\
+    \text{or, } \sum_{k=0}^{\infty} k^2 p^k &= \frac{p(1+p)}{q^3}
+    \quad \text{(Multiplying by \(p\))}\\
+    \text{\(\because\) the \(k=0\) term is \(0\).}
+  \end{align*}
+
+  Now, for \(E[X^2]\):
+  \begin{align*}
+    E[X^2] &= \sum_{x=0}^{\infty} x^2 P[X=x] \\
+           &= \sum_{x=0}^{\infty} x^2 q^x p \\
+           &= p \sum_{x=0}^{\infty} x^2 q^x \\
+           &= p \left( \frac{q(1+q)}{(1-q)^3} \right) \\
+           &= p \left( \frac{q(1+q)}{p^3} \right) \\
+           &= \frac{q(1+q)}{p^2}
+  \end{align*}
+  Now, \(Var(X)\):
+  \begin{align*}
+    Var(X) &= E[X^2] - (E[X])^2 \\
+           &= \frac{q(1+q)}{p^2} - \left(\frac{q}{p}\right)^2 \\
+           &= \frac{q+q^2}{p^2} - \frac{q^2}{p^2} \\
+           &= \frac{q}{p^2}
+  \end{align*}
+
+  \begin{equation}
+    \label{eqn:variance-geometric-X}
+    \boxed{\therefore Var(X) = \frac{q}{p^2} = \frac{1-p}{p^2}}
+  \end{equation}
+
+  For \(Y\) (number of trials until first success):
+  Derivation (substitute \(Y=X+1\)):
+  We use the property \(Var(aZ+b) = a^2 Var(Z)\).
+  Here, \(Y = X+1\), so \(a=1, b=1\).
+  \begin{align*}
+    Var(Y) &= Var(X+1) \\
+           &= Var(X) \quad \text{(since adding a constant does not change variance)} \\
+           &= \frac{q}{p^2}
+  \end{align*}
+
+  \begin{equation}
+    \label{eqn:variance-geometric-Y}
+    \boxed{\therefore Var(Y) = \frac{q}{p^2} = \frac{1-p}{p^2}}
+  \end{equation}
+

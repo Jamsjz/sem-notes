@@ -1,0 +1,188 @@
+\subsection{Expectation of Binomial Distribution}
+\label{ssec:expectation-of-binomial-distribution}
+
+Given a binomial random variable \(X \sim \text{Binomial}(n,
+p)\) with probability mass function:
+\[
+  P_X(r) = P(X = r) = \binom{n}{r} q^{n-r} p^{r}, \quad r =
+  0, 1, 2, \ldots, n,
+\]
+where \( q = 1 - p \).
+
+\bigskip
+
+\begin{definition}
+  The expectation \(E[X]\) is defined as:
+  \[
+    E[X] = \sum_{r=0}^n r \, P_X(r) = \sum_{r=0}^n r
+    \binom{n}{r} q^{n-r} p^r.
+  \]
+\end{definition}
+
+\bigskip
+
+\begin{note}
+  The term for \(r=0\) is zero since it is multiplied by
+  \(r\), so we can start the sum from \(r=1\):
+  \[
+    E[X] = \sum_{r=1}^n r \binom{n}{r} q^{n-r} p^r.
+  \]
+\end{note}
+
+\bigskip
+
+Rewrite \(r \binom{n}{r}\) using the identity:
+\[
+  r \binom{n}{r} = n \binom{n-1}{r-1}.
+\]
+
+Therefore,
+\[
+  E[X] = \sum_{r=1}^n n \binom{n-1}{r-1} q^{n-r} p^r = n \sum_{r=1}^n \binom{n-1}{r-1} q^{n-r} p^r.
+\]
+
+\bigskip
+
+Change the index of summation by letting \(k = r - 1\). When
+\(r=1\), \(k=0\), and when \(r=n\), \(k=n-1\). So,
+\[
+  E[X] = n \sum_{k=0}^{n-1} \binom{n-1}{k} q^{n - (k+1)}
+  p^{k+1} = n p \sum_{k=0}^{n-1} \binom{n-1}{k} q^{(n-1)-k}
+  p^k.
+\]
+
+\bigskip
+
+Notice that the sum is the binomial expansion of \((p +
+q)^{n-1}\):
+\[
+  \sum_{k=0}^{n-1} \binom{n-1}{k} p^k q^{(n-1)-k} = (p + q)^{n-1} = 1^{n-1} = 1.
+\]
+
+\bigskip
+
+Hence,
+\[
+  E[X] = n p \cdot 1 = n p.
+\]
+
+\bigskip
+
+\begin{remark}
+  The expectation of a binomial random variable \(X \sim \text{Binomial}(n,p)\) is
+  \begin{equation}
+    \label{eqn:expectation-of-binomial-distribution}
+    \begin{displaystyle}
+      \boxed{E[X] = n p.}
+    \end{displaystyle}
+  \end{equation}
+\end{remark}
+
+\subsection{Variance of Binomial Distribution}
+\label{ssec:variance-of-binomial-distribution}
+
+Recall that the
+\hyperref[sec:variance-of-a-random-variable]{variance of a
+random variable} \(X\) is defined as:
+\[
+  \operatorname{Var}(X) = E[X^2] - (E[X])^2.
+\]
+
+We have already derived that,
+\footnote{See \autoref{eqn:expectation-of-binomial-distribution}}
+\[
+  E[X] = n p.
+\]
+
+\bigskip
+
+Next, we compute \(E[X^2]\):
+\[
+  E[X^2] = \sum_{r=0}^n r^2 P_X(r) = \sum_{r=0}^n r^2 \binom{n}{r} q^{n-r} p^r,
+\]
+where \(q = 1-p\).
+
+\bigskip
+
+Rewrite \(r^2\) as \(r(r-1) + r\), so that
+\begin{align*}
+  E[X^2] 
+&= \sum_{r=0}^n \bigl[r(r-1) + r\bigr] \binom{n}{r} q^{n-r} p^r \\
+&= \sum_{r=0}^n r(r-1) \binom{n}{r} q^{n-r} p^r + \sum_{r=0}^n r \binom{n}{r} q^{n-r} p^r.
+\end{align*}
+
+\bigskip
+
+We already know the second sum is \(E[X] = n p\). Focus on the first sum:
+\[
+  S = \sum_{r=0}^n r(r-1) \binom{n}{r} q^{n-r} p^r.
+\]
+
+\bigskip
+
+Using the combinatorial identity:
+\[
+  r(r-1) \binom{n}{r} = n (n-1) \binom{n-2}{r-2},
+\]
+we get
+\[
+  S = n (n-1) \sum_{r=2}^n \binom{n-2}{r-2} q^{n-r} p^r.
+\]
+
+\bigskip
+
+Change the index by letting \(k = r - 2\). When \(r=2\), \(k=0\), and when \(r=n\), \(k = n-2\):
+\begin{align*}
+  S 
+&= n (n-1) \sum_{k=0}^{n-2} \binom{n-2}{k} q^{n - (k+2)} p^{k+2} \\
+&= n (n-1) p^2 \sum_{k=0}^{n-2} \binom{n-2}{k} q^{(n-2)-k} p^k.
+\end{align*}
+
+\bigskip
+
+Recognize the sum as the binomial expansion of \((p + q)^{n-2} = 1^{n-2} = 1\):
+\[
+  S = n (n-1) p^2.
+\]
+
+\bigskip
+
+Putting it all together:
+\begin{align*}
+  E[X^2] &= S + E[X] \\
+         &= n (n-1) p^2 + n p.
+\end{align*}
+
+\bigskip
+
+Finally, compute the variance:
+\begin{align*}
+  \operatorname{Var}(X) 
+&= E[X^2] - (E[X])^2 \\
+&= n (n-1) p^2 + n p - (n p)^2 \\
+&= n (n-1) p^2 + n p - n^2 p^2.
+\end{align*}
+
+\bigskip
+
+Simplify:
+\begin{align*}
+  \operatorname{Var}(X) 
+&= n p + n (n-1) p^2 - n^2 p^2 \\
+&= n p + n^2 p^2 - n p^2 - n^2 p^2 \\
+&= n p - n p^2 \\
+&= n p (1 - p) \\
+&= n p q.
+\end{align*}
+
+\bigskip
+
+\begin{remark}
+  The variance of a binomial random variable \(X \sim \text{Binomial}(n,p)\) is
+  \[
+    \boxed{
+      \operatorname{Var}(X) = n p q,
+    }
+  \]
+  where \(q = 1 - p\).
+\end{remark}

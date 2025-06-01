@@ -1,0 +1,113 @@
+\chapter{Introduction to Algorithms and Algorithm Analysis}
+\lecture{1}{16 Apr. 09:39}{First Lecture}
+\label{chap:intro-algo-nanalysis}
+
+\begin{note}[Objectives]
+  \begin{itemize}
+    \item Agimtotic analysis??
+  \end{itemize}
+\end{note}
+
+\section{Introduction to Algorithm}
+\label{sec:intro-algo}
+
+\begin{definition}[Algorithm]
+  An algorithm is a step-by-step procedure or set of rules desighned to solve a
+  problem or perform a task.
+\end{definition}
+
+\textbf{Algorithms are everywhere}
+\begin{itemize}
+  \item Sorting a list of names alphabetically.
+  \item Searching for a word in a dictionary.
+\end{itemize}
+
+\section{Components of Algorithm}
+\label{ssec:components-of-algo}
+
+\begin{itemize}
+  \item Problem
+  \item Solution
+  \item Steps
+  \item characterstics
+\end{itemize}
+
+\section{Characterstics of an Algorithm}
+\label{ssec:char-algo}
+\paragraph{Finiteness} The algorithm should terminate.
+\paragraph{Definiteness} Every step should be well-defined (non-ambiguos)
+\paragraph{Input and Input Size}
+The no. of entities the algorithm handles. It is denoted by "n".
+\begin{eg}
+  In a searching algorithm,the algorithm needs a sequence of entities and the
+  entity to search.
+\end{eg}
+\paragraph{Output} The outcome of running the whole algorithm.
+
+\paragraph{Effectiveness (not to be confused with efficient)}
+Does the algorithm solve the problem it was meant to
+solve? \autoref{ssec:components-of-algo}
+
+\paragraph{Efficiency}
+Sometimes algorithms can be useless even if the algorithm is effective in
+real world scenarios.
+\begin{eg}
+  See the travelling salesman problem 
+  \begin{problem}[Travelling Salesman Problem ]
+    \label{prob:travelling-salesman}
+      %:TODO
+  \end{problem}
+\end{eg}
+
+\section{Analysis of an Algorithm}
+\label{ssec:analysis-algo}
+\begin{problem}[\textbf{Why to Analyze Algorithm?}]
+  Some sorting algoritms are:
+  \begin{itemize}
+    \item Quick
+    \item Merge
+    \item Bubble
+    \item Selection
+  \end{itemize}
+  \textbf{How to know which sorting algorithm is fastest?}\\ 
+  \textbf{How to know which sorting algorithm takes the least amount of memory?\\}
+  \begin{answer}
+    Analyze the algorithm!! for \textbf{Efficiency}\\
+    Basis of measuring efficiency:
+    \begin{enumerate}
+      \item Time Complexity
+      \item Space Complexity
+    \end{enumerate}
+  \end{answer}
+\end{problem}
+
+\section{Time Complexity}
+\label{sec:time-complexity-algo}
+We evalute the time complexity by calculating the number of operations in a
+algorithm denoted by "n".
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg1.png}
+  \caption{Time Complexity of Algorithms when \(n \to \infty\)}
+  \label{fig:time-complexity}
+\end{figure}
+
+The time complexity of algorithms are measured in
+\(O(\text{expression})\) big O notation, \(\Omega\) notation and \(\theta\)
+notation.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline 
+    Notations&Case\\
+    \hline
+    \(\Omega\)&Best\\
+    \(\theta\)&Average\\
+    \(O\)&Worst\\
+    \hline
+  \end{tabular}
+  \caption{Notations for time complexity}
+  \label{tab:notations-for-time-complexity}
+\end{table}

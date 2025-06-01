@@ -1,0 +1,149 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{geometry}
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+  \def\svgwidth{\columnwidth}
+  \import{./Figures/}{#1.pdf_tex}
+}
+
+\usepackage[most]{tcolorbox}
+
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\W}{\mathbb{W}}
+
+\usepackage{tikz}
+\usepackage{xparse}
+
+% Define a new environment for polar grid
+\NewDocumentEnvironment{polargrid}{O{4}O{4}O{12}O{4.5}}{%
+  % #1 = max radius (default: 4)
+  % #2 = number of concentric circles (default: 4)
+  % #3 = number of rays (default: 12)
+  % #4 = axis length beyond max radius (default: 4.5)
+  \begin{tikzpicture}[>=latex]
+    % Draw the outer circle
+    \draw[lightgray, thin] (0,0) circle (#1);
+    % Draw concentric circles
+    \foreach \r in {1,...,\numexpr#2-1\relax} {
+      \draw[lightgray, thin] (0,0) circle (\r*#1/#2);
+    }
+    % Draw rays
+    \foreach \i in {0,...,\numexpr#3-1\relax} {
+      \pgfmathsetmacro{\angle}{(\i*360)/#3}
+      \draw[lightgray, thin] (\angle:#1) -- (\angle:0);
+    }
+    % Draw main axes
+    \foreach \angle in {0,90,180,270} {
+      \draw[black, thick] (\angle:#1) -- (\angle:0);
+    }
+    % Angle labels
+    \foreach \i/\label in {
+      30/$\frac{\pi}{6}$,
+      60/$\frac{\pi}{3}$,
+      120/$\frac{2\pi}{3}$,
+      150/$\frac{5\pi}{6}$,
+      180/$\pi$,
+      210/$\frac{7\pi}{6}$,
+      240/$\frac{4\pi}{3}$,
+      270/$\frac{3\pi}{2}$,
+      300/$\frac{5\pi}{3}$,
+      330/$\frac{11\pi}{6}$
+    } {
+      \draw (\i:#1 + 0.3) node {\label};
+    }
+    % Draw axis labels
+    \draw[->, thick] (0,0) -- (0,#4) node[above] {$\mathbf{y}$};
+    \draw[->, thick] (0,0) -- (#4,0) node[right] {$\mathbf{x}$};
+  }{%
+  \end{tikzpicture}
+}
+
+% Command for plotting points on polar grid
+% This version properly handles negative radii by adding 180 degrees to the angle
+\NewDocumentCommand{\polarpoint}{mmO{red}O{}}{%
+  % #1 = radius
+  % #2 = angle in radians (will be converted to degrees)
+  % #3 = point color (default: red)
+  % #4 = label (optional)
+
+  % Handle negative radius by adding 180° to angle and using absolute radius
+  \pgfmathsetmacro{\radius}{abs(#1)}
+  \pgfmathsetmacro{\angle}{#2*180/pi}
+
+  % If radius is negative, adjust the angle by adding 180°
+  \ifdim #1 pt < 0 pt
+    \pgfmathsetmacro{\angle}{\angle + 180}
+  \fi
+
+  % Normalize angle to be between 0° and 360°
+  \pgfmathsetmacro{\angle}{mod(\angle, 360)}
+
+  \draw[fill=#3] (\angle:\radius) circle (2pt) 
+  \ifx\relax#4\relax\else
+    node[above right, font=\scriptsize] {#4}
+  \fi;
+}
+
+% For convenience, a command that formats polar coordinates nicely
+\NewDocumentCommand{\polarcoord}{mm}{%
+  % #1 = radius
+  % #2 = angle (in radians)
+  $(#1, \formatangle{#2})$%
+}
+
+% Helper command to format angles nicely
+\NewDocumentCommand{\formatangle}{m}{%
+  \ensuremath{#1}%
+}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings, breakable, skins}
+
+% Problem box
+\newtcolorbox[auto counter, number within=section]{problem}[1][]{%
+  colback=red!5!white,
+  colframe=red!100!black,
+  fonttitle=\bfseries,
+  title=Problem~\thetcbcounter,
+  label=#1,
+  enhanced,
+  breakable,
+  sharp corners,
+  boxrule=0.8pt,
+  coltitle=black,
+  before upper={\parindent15pt}, % optional formatting
+}
+
+% Solution box
+\newtcolorbox[auto counter, number within=section]{solution}[1][]{%
+  colback=green!5!white,
+  colframe=green!100!black,
+  fonttitle=\bfseries,
+  title=Solution~\thetcbcounter,
+  label=#1,
+  enhanced,
+  breakable,
+  sharp corners,
+  boxrule=0.8pt,
+  coltitle=black,
+  before upper={\parindent15pt}, % optional formatting
+}

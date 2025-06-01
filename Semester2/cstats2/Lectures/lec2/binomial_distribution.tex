@@ -1,0 +1,156 @@
+\section{Binomial Expansion}
+\label{sec:binomial-expansion}
+\[
+  (a+b)^{n} = \sum_{r=0}^{n}{\binom{n}{r} a^{n-r}b^{r}}
+.\] 
+
+\subsection{Properties of Binomial Expansion}
+\label{ssec:properties-of-binomial-expansion}
+
+\begin{enumerate}
+  \item There are \(n+1\) elements.
+  \item \(\binom{n}{r} = \binom{n}{n-r}\)
+  \item \((n-r)+r = n\) 
+  \item \(t_{r+1} = \binom{n}{r} q^{n-r} p^{r}\)
+\end{enumerate}
+
+\section{Head Tail Experiment(HTE)}
+\label{sec:head-tail-experiment}
+
+\subsection{Outcomes of \hyperref[sec:head-tail-experiment]{HTE}}
+\label{ssec:outcomes-of-hte}
+
+A HTE has 2 possible outcomes. So it is
+\href{sec:bernoulli-process}{Bernoulli Process}.
+\begin{enumerate}
+  \item Head (H)
+  \item Tail (T)
+\end{enumerate}
+
+We set Head to be success (1) and Tail to be failure (0).\\
+
+Then, we have the probability of success as:
+\[p = \frac{1}{2}\] 
+And of failure as:
+\[q = \frac{1}{2}\] 
+
+\textbf{Experiment:}\\
+Let, \(n\) be the \(\#\)trials i.e we toss a coin \(n\)
+times.\\[10pt]
+The outcome of this experiment is that we get \(r\) \(\#\)
+success and \((n-r)\) failure.\\
+
+\begin{note}
+  The Probability that we get exactly  \(r\) \(\#\) success
+  is same as:
+  \[
+    \binom{n}{r}q^{n-r}p^{r}
+  \]
+  because as stated before, there are \(r\) success. So the
+  probability:\\
+  \marginpar{\(p\) is fixed.}
+  \[P(H \cap H \cap H \ldots \text{r times}) = \prod^{r}p=p^{r}\]
+  and similarly, \(q^{n-r}\) i.e.
+
+  \begin{equation}
+    \label{eqn:binomial-distribution}
+    \begin{displaystyle}
+      P_X(r) = P(X=r) = \binom{n}{r}q^{n-r}p^{r}
+    \end{displaystyle}
+    \marginpar{ See
+      \hyperref[def:probability-mass-function]{Probability
+    Mass Function}.}
+  \end{equation}
+
+\end{note}
+
+\begin{note}
+  The Probability that we get at most  \(r\) \(\#\) success
+  is same as \(F_X(r)\):
+
+  \begin{equation}
+    \label{eqn:cdf-binomial-distribution}
+    \begin{displaystyle}
+      F_X(r) = P(X\le r) = \sum_{n=0}^{r} P_X(r) 
+    \end{displaystyle}
+    \marginpar{ See
+      \hyperref[def:cumulative-distribution-function]{Cumulative
+    Distribution Function}.}
+  \end{equation}
+\end{note}
+
+\section{Exclusive and Independent Events}
+\label{sec:exclusive-and-independent-events}
+
+\begin{definition}[Mutually Exclusive Events]
+  \label{def:mutually-exclusive-events}
+  Two events \( A \) and \( B \) are mutually exclusive
+  (disjoint) if they cannot occur simultaneously.
+  Mathematically:
+  \[
+    P(A \cap B) = 0
+  \]
+\end{definition}
+
+\begin{definition}[Independent Events]
+  \label{def:independent-events}
+  Two events \( A \) and \( B \) are independent if the
+  occurrence of one does not affect the probability of the
+  other. Mathematically:
+  \[
+    P(A \cap B) = P(A) \cdot P(B)
+  \] or,
+  \[
+    P(A \mid B) = P(A)
+  \]
+\end{definition}
+
+\section{Bernoulli Process}
+\label{sec:bernoulli-process}
+In this whole experiment, we have tossed a coin many times.
+First we fixed how many times we toss. (We fix \(n\)). We
+have the two possible events, one head and the other tail.
+These events are mutually exclusive and independent. We also
+know the probability of success and this probability is
+constant (fixed) throughout the experiment.
+
+What we have defined here is a process called
+\textbf{Bernoulli Process}.
+
+\begin{remark}
+  A Bernoulli process consists of many independent \emph{Bernoulli Trials},
+  each trial having exactly two possible outcomes (often
+  called success and failure).
+\end{remark}
+
+\begin{definition}[Bernoulli Process]
+  \label{def:bernoulli-process}
+  A \emph{Bernoulli process} is a sequence of independent
+  and identically distributed (i.i.d.) \emph{Bernoulli trials},
+  where each trial results in one of two possible outcomes:
+  "success" (with probability \(p\)) or "failure" (with
+  probability \(1-p\)). The number of trials \(n\) is fixed
+  in advance, and the probability of success \(p\) remains
+  constant throughout the experiment.
+
+  Formally, the process consists of random variables \(X_1,
+  X_2, \ldots, X_n\), where each
+  \[
+    R_{X_i} = 
+    \begin{cases}
+      1, & \text{with probability } p \quad (\text{success}) \\
+      0, & \text{with probability } 1-p \quad (\text{failure})
+    \end{cases}
+  \]
+  represents range of random variable for \(i^{th}\) trial among the \(n\)
+  trials and \(X_i\) are independent.\\
+
+  Here,
+  \begin{enumerate}
+    \item \(n\) is fixed
+    \item Events are mutually exclusive
+    \item Trials are independent
+    \item \(p\) is known and fixed throughout the
+      experiment.
+  \end{enumerate}
+\end{definition}

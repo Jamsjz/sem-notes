@@ -1,0 +1,200 @@
+\chapter{Negative Binomial Distribution}
+\label{chap:negative-binomial-distribution}
+\lecture{5}{1 Jun. 10:18}{Fifth Lecture}
+
+\begin{eg}[Coin Tossing for Multiple Heads]
+  \label{eg:coin-toss-nbd}
+  Suppose we are flipping a fair coin repeatedly. Each flip is an independent
+  Bernoulli trial. Let \(p\) be the probability of getting a Head (success), and
+  \(q=1-p\) be the probability of getting a Tail (failure). We are interested in
+  the number of Tails, \(X\), observed before we obtain exactly \(r\) Heads.
+  \marginpar{Example: Number of tails before \(r\) heads.}
+
+  For instance, let \(r=3\) (we want 3 Heads) and assume the probability of a
+  Head is \(p=0.5\). We continue flipping the coin until we have observed 3
+  Heads. The number of Tails(failures) \(X\) that occurred before the 3rd Head
+  is a random variable following a Negative Binomial distribution.
+  Possible outcomes for \(X\) could be:
+  \begin{itemize}
+    \item HHH: 0 Tails (\(k=0\)). The sequence ends with the 3rd Head.
+    \item THHH: 1 Tail (\(k=1\)).
+    \item HTHH: 1 Tail (\(k=1\)).
+    \item HHTH: 1 Tail (\(k=1\)).
+    \item TTHHH: 2 Tails (\(k=2\)).
+  \end{itemize}
+  This scenario perfectly illustrates the conditions for a Negative Binomial
+  distribution:
+  \begin{itemize}
+    \item The experiment consists of a sequence of independent trials (each coin
+      flip).
+    \item Each trial has only two possible outcomes: success (Head) or failure
+      (Tail).
+    \item The probability of success (\(p\)) is constant for each trial.
+    \item The experiment continues until a fixed number of successes (\(r\)) is
+      achieved.
+  \end{itemize}
+  The random variable of interest, \(X\), is the number of failures (Tails) that
+  occur before the \(r\)-th success (Head).
+\end{eg}
+
+\section{Definition}
+\begin{definition}[Negative Binomial Distribution]
+  \label{def:neg-binomial}
+  The Negative Binomial distribution, sometimes referred to as the Pascal
+  distribution, is a discrete probability distribution. It models the random
+  variable \(X\) that represents the \(\#\) failures that occur
+  before a specified (constant or fixed) number of successes, denoted by \(r\),
+  is achieved.\\
+
+  \textbf{A random variable \(X\) that follows a Negative Binomial distribution is
+  commonly denoted as \(X \sim \text{NB}(r, p)\)}\\
+  where,\\
+  \(r\) is the \(\#\) success\\
+  \(p\) is the probability of success for one trial.\\
+
+  A random process is described by the Negative Binomial distribution if it
+  adheres to the following conditions:
+  \begin{itemize}
+    \item The process is a sequence of independent trials.
+    \item Each trial results in one of two outcomes, termed success or failure.
+    \item The probability of success, \(p\), is constant for all trials.
+    \item The experiment is continued until a predetermined total of \(r\)
+      successes are observed. Here, \(r\) must be a positive integer.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  \label{remark:alter-formulation-nbd}
+  It's worth noting an alternative formulation where the distribution
+  models the total number of trials \(Y = X+r\) required to achieve \(r\)
+  successes.
+\end{remark}
+
+\section{Probability Mass Function (PMF) of \(X\)}
+The \textbf{PMF} of \(\text{NB}(r,p)\), \(P(X=x)\), quantifies the probability
+of observing exactly \(x\) failures prior to achieving the \(r\)-th success in a
+series of independent Bernoulli trials with \(p\) the success probability.
+
+That means, there are \(x\) failures and \(r\) success. So the total \(\#\)
+trials is \(k=x+r\). And first \(x+r-1\) trials represent \(Y \sim \text{Bin}(n,p)\).
+Then,
+\begin{align*}
+  P(X=x) &= P(Y=r-1)\cdot p\\
+  \marginpar{\(\because\) probability of \(k^{th}\) success is \(p\)}\\
+  P(X=x) &= \binom{x+r-1}{r-1}q^{x}p^{r-1}\cdot p\\
+  P(X=x) &= \binom{x+r-1}{r-1}q^{x}p^{r}\\
+\end{align*}
+
+\(\therefore\) PMF for \(X \sim NB(r,p)\) is:
+
+\begin{equation}
+  \label{eq:nbd_pmf}
+  \boxed{
+    P(X=x) = \binom{x+r-1}{x} p^r (1-p)^x, \quad \text{for } x\in \mathbb{N}_0
+  }
+\end{equation}
+
+Here, \(1-p\) is often denoted as \(q\), the probability of failure.
+
+\section{Expectation of \(X\)}
+\label{sec:nbd_expectation}
+The expectation (or mean) of a random variable \(X \sim \text{NB}(r, p)\),
+denoted \(E[X]\), can be derived by considering \(X\) as a sum of independent
+Geometric random variables. 
+
+Let \(X_i\) for \(i=1, \dots, r\) be the number of failures between the
+\((i-1)\)-th success and the \(i\)-th success.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/pimg2.png}
+  \caption{\(X_i\) follows Geometric distribution}
+  \label{fig:pimg2--x_i-follows-geometric-distribution}
+\end{figure}
+
+Each \(X_i\) follows a Geometric distribution with success probability \(p\),
+specifically \(X_i \sim Geom(p)\). The PMF for such a variable (counting
+failures before the first success) is \(P(X_i=k) = (1-p)^k p\) for \(k=0, 1, 2,
+\dots\). The expectation of this form of Geometric distribution is \(E[X_i] =
+\frac{q}{p}\). \marginpar{For \(Y \sim Geom(p)\) counting failures before 1st
+success, \(E[Y] = q/p\).}\\
+
+The total number of failures \(X\) before \(r\) successes is the sum of these
+\(r\) independent Geometric variables:
+\[ X = X_1 + X_2 + \dots + X_r \]
+By the linearity of expectation:
+\begin{align*}
+  E[X] &= E[X_1 + X_2 + \dots + X_r] \\
+       &= E[X_1] + E[X_2] + \dots + E[X_r] \\
+       &= \sum_{i=1}^{r} E[X_i] \\
+       &= \sum_{i=1}^{r} \frac{q}{p} \\
+       &= r \frac{1-p}{p}\\
+       &= \frac{rq}{p}
+\end{align*}
+Thus, the expectation of \(X \sim NB(r,p)\) is:
+\begin{equation}
+  \label{eq:nbd_expectation}
+  E[X] = \frac{rq}{p}
+\end{equation}
+\(\E[X]\) is expected number of failures before r success
+
+\section{Variance of \(X\)}
+\label{sec:nbd_variance}
+The variance of \(X \sim NB(r, p)\), denoted \(Var(X)\), can similarly be
+derived using the representation of \(X\) as the sum of \(r\) independent
+Geometric random variables \(X_i \sim Geom(p)\), as defined in the expectation
+section. The variance of each \(X_i\) (number of failures before the first
+success, with success probability \(p\)) is \(Var(X_i) = \frac{q}{p^2}\).
+\marginpar{For \(Y \sim Geom(p)\) counting failures before 1st success, \(Var(Y)
+= (q)/p^2\).}\\
+
+Since the \(X_i\) variables are independent, the variance of their sum is the sum of their variances:
+\begin{align*}
+  Var(X) &= Var(X_1 + X_2 + \dots + X_r) \\
+         &= Var(X_1) + Var(X_2) + \dots + Var(X_r) \quad \text{(due to independence of \(X_i\))} \\
+         &= \sum_{i=1}^{r} Var(X_i) \\
+         &= \sum_{i=1}^{r} \frac{q}{p^2} \\
+         &= \frac{rq}{p^2}
+\end{align*}
+Thus, the variance of the Negative Binomial distribution (\(X \sim NB(r,p)\)) is:
+\begin{equation}
+  \label{eq:nbd_variance}
+  Var(X) = \frac{rq}{p^2}
+\end{equation}
+An important property is that the variance of the Negative Binomial distribution
+can be larger than its mean, making it suitable for modeling overdispersed count
+data.
+
+\section{Alternate Formulation using \(Y=X+r\)}
+\label{sec:alternate-formulation-using-y-x-r-}
+
+Here, \(Y\) is the random variable that represents the \(\#\) trials to get
+\(r^{th}\) success.
+
+\subsection{PMF of Y}
+\label{ssec:pmf-of-y-nbd}
+
+\begin{equation}
+  \label{eqn:pmf-of-y-nbd}
+  \boxed{P[Y=y] = \binom{y-1}{r-1}q^{y-r}\cdot p^{r}}
+\end{equation}
+
+This measures the probability of getting \(r^{th}\) success in \(y\) trials.
+
+\subsection{Expectation of Y}
+\label{ssec:expectation-of-y-nbd}
+
+\marginpar{Using \href{ssec:linearity-of-expectation}{Linearity of Expectation}}
+\begin{equation}
+  \label{eqn:expectation-of-y-nbd}
+  \boxed{\E[Y]=\E[X+r]=\frac{r(1-p)}{p}+r = \frac{r}{p}}
+\end{equation}
+This measures the expected number of trials to get \(r^{th}\) success.
+
+\subsection{Variance of Y}
+\label{ssec:variance-of-y-nbd}
+
+\begin{equation}
+  \label{eqn:variance-of-y-nbd}
+  \boxed{\text{Var}[Y] = \text{Var}[X+r]= \text{Var}[X]  = \frac{rq}{p^2}}
+\end{equation}

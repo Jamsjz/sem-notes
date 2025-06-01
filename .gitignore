@@ -1,0 +1,53 @@
+# =========================================================================
+# === Ignore everything by default ===
+# =========================================================================
+*
+
+# =========================================================================
+# === IMPORTANT: Un-ignore directories ===
+# =========================================================================
+# This allows Git to traverse into directories to find files
+# that should NOT be ignored by the rules below.
+!*/
+
+# =========================================================================
+# === Allow specific file types globally ===
+# =========================================================================
+# Allow .gitignore files (this file itself)
+!.gitignore
+
+# Allow .tex files anywhere
+!*.tex
+
+# Allow .pdf files anywhere
+!*.pdf
+
+# Allow .bib files anywhere
+!*.bib
+
+# Allow .tex.latexmain files anywhere
+!*.tex.latexmain
+
+# =========================================================================
+# === Allow specific folder contents ===
+# =========================================================================
+# Allow all files and subfolders within any folder named "Figures"
+# The "Figures" directory itself is already un-ignored by the `!*/` rule.
+# This rule ensures all its contents (files and sub-folders) are kept.
+!**/Figures/**
+
+# =========================================================================
+# === Allow specific file types in specific folders ===
+# =========================================================================
+# Allow all .tex files within any folder named "Lectures" (and its subdirectories)
+# Parent "Lectures" directories and their subdirectories are already un-ignored by `!*/`.
+# This rule specifically keeps .tex files within them.
+!**/Lectures/**/*.tex
+
+# =========================================================================
+# Any file or directory not matching the ! (un-ignore) rules above
+# will remain ignored due to the initial "*" rule.
+# This includes LaTeX auxiliary files like .aux, .log, .bbl, .blg, .toc,
+# .synctex.gz, .fdb_latexmk, .out, .run.xml, etc., unless they happen
+# to match one of the explicit allow rules (e.g. a .pdf in Figures).
+# =========================================================================

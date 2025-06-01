@@ -1,0 +1,93 @@
+\chapter{Plotting Polar Coordinates and Transforming them}
+\lecture{2}{16 Apr. 14:16}{Handling Polar Coordinates}
+\label{chap:plotting-polar-coordinates-and-transforming-them}
+
+\section{Graph of Polar Coordinate System}
+\label{sec:graph-polar-coord-sys}
+\begin{figure}[H]
+  \centering
+  \begin{polargrid}[4][4][12][4.5][1]
+  \end{polargrid}
+  \caption{Polar Coordinate System}
+  \label{fig:polar-coord-sys-graph}
+\end{figure}
+
+\begin{exercise}
+  Plot:
+  \begin{enumerate}
+    \item \((-1,\frac{3\pi}{4})\)
+    \item \((2,-\frac{3\pi}{2})\)
+    \item \((-4,-\frac{5\pi}{6})\)
+  \end{enumerate}
+\end{exercise}
+\begin{answer}
+  \begin{polargrid}[4][4][24][4.5][1]
+    \polarpoint{-1}{3*pi/4}[red][$(-1, \frac{3\pi}{4})$]
+    \polarpoint{2}{-3*pi/2}[red][$(2, -\frac{3\pi}{2})$]
+    \polarpoint{-4}{-5*pi/6}[red][$(-4, -\frac{5\pi}{6})$]
+  \end{polargrid}
+\end{answer}
+
+\section{Deceptive Coordinates}
+\label{sec:polar-deceptive-coord}
+\begin{problem}[Same point in different form give different analysis]
+  Does the point \((2,\frac{\pi}{2})\) lie on the curve \(r=2\cos 2\theta\)?\\
+  How do you check it?
+  \begin{answer}
+    By substituting the value of \(r\) and \(\theta\) in the above equation.
+    The answer is \textbf{NO}!
+  \end{answer}
+  But take the same point but written as: \((-2,\frac{\pi}{2})\). Now does it
+  lie on the curve \(r=2\cos 2\theta\)? \textbf{YES}!
+\end{problem}
+
+\begin{note}[Solution to Deceptive Coordinates]
+  \textbf{Use Cartesian Coordinates}!!\\
+  To solve this duality of polar coordinates, simply change the polar
+  coordinates to Cartesian Coordinate
+  \autoref{sec:relating-cartesian-and-polar-coordinates}.
+\end{note}
+
+
+\section{Relating Cartesian and Polar Coordinates}
+\label{sec:relating-cartesian-and-polar-coordinates}
+Polar and Cartesian Coordinates relate by the following formulae:
+\begin{enumerate}
+  \item \(x^2+y^2 = r^2\) 
+  \item \(\tan \theta = \frac{y}{x}\) 
+  \item \(x = r\cos\theta\) 
+  \item \(y = r\sin\theta\)
+\end{enumerate}
+\subsection*{Examples of Coordinate Conversion}
+\label{ssec:examples-of-coordinate-conversion}
+
+\begin{eg}[Cartesian to Polar]
+  Convert the Cartesian coordinates $(3, 4)$ to polar coordinates $(r, \theta)$.
+
+  \textbf{Solution:}
+  \begin{itemize}
+    \item Calculate radius: $r = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$
+    \item Calculate angle: $\theta = \arctan\left(\frac{4}{3}\right) \approx 53.13^\circ$ or $0.93$ radians
+  \end{itemize}
+  Result: $(5, 53.13^\circ)$ or $(5, 0.93\ \text{rad})$
+\end{eg}
+
+\begin{eg}[Polar to Cartesian]
+  Convert the polar coordinates $(2, \pi/3)$ to Cartesian coordinates $(x, y)$.
+
+  \textbf{Solution:}
+  \begin{itemize}
+    \item Calculate $x$: $x = 2\cos\left(\frac{\pi}{3}\right) = 2 \times \frac{1}{2} = 1$
+    \item Calculate $y$: $y = 2\sin\left(\frac{\pi}{3}\right) = 2 \times \frac{\sqrt{3}}{2} = \sqrt{3}$
+  \end{itemize}
+  Result: $(1, \sqrt{3})$
+\end{eg}
+
+\begin{remark}
+  Remember these key points:
+  \begin{itemize}
+    \item For Cartesian \(\to \) Polar, always consider the \textbf{quadrant} when calculating $\theta$
+    \item For Polar \(\to \) Cartesian, exact values are preferred when angles are special fractions of $\pi$
+  \end{itemize}
+\end{remark}
+

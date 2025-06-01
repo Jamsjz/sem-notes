@@ -1,0 +1,328 @@
+\documentclass[a4paper]{article}
+\input{~/LaTeX-Template/headers/simple.tex}
+\author{Bhashkar Paudyal}
+\title{Workbook 1}
+
+\begin{document}
+  \maketitle
+  \newpage
+
+  \tableofcontents{}
+  \newpage
+
+  \section{Deceptive Coordinates}
+  \label{sec:deceptive-coordinates}
+
+  \begin{problem}{Find 5 different ways to express the following using polar
+    coordinates.\\}
+    \begin{polargrid}[5][5][24][5.5]
+      \polarpoint{3}{7*pi/6}[red][\((3,\frac{7\pi}{6})\)]
+    \end{polargrid}
+    \begin{solution}
+      \begin{enumerate}
+        \item \((3,\frac{7\pi}{6})\)
+        \item \(-3,\frac{\pi}{6}\) 
+        \item \((3,-\frac{5\pi}{6})\) 
+        \item \((-3,\frac{13\pi}{6})\) 
+        \item \((3, \frac{19\pi}{6})\)
+      \end{enumerate}
+    \end{solution}
+  \end{problem}
+
+  \newpage
+
+  \section{Plotting Polar Coordinates}
+  \label{sec:plotting-polar-coordinates}
+
+  \textbf{Plot the following polar coordinates.\\}
+    \begin{enumerate}
+      \item \((5,\frac{3\pi}{4})\) 
+      \item \((-4,\frac{17\pi}{3})\) 
+      \item \((-4,\frac{\pi}{6})\) 
+      \item \((3,-\frac{2\pi}{3})\) 
+      \item \((6,-\frac{37\pi}{3})\)
+      \item \((-6,-\frac{7\pi}{6})\)
+    \end{enumerate}
+    
+    \begin{polargrid}[6][6][12][6.5]
+      \polarpoint{-4}{pi/6}[red][\((-4,\frac{\pi}{6})\)]
+      \polarpoint{5}{3*pi/4}[red][\((5,\frac{3\pi}{4})\)]
+      \polarpoint{3}{-2*pi/3}[red][\((3,-\frac{2\pi}{3})\)]
+      \polarpoint{-6}{-7*pi/6}[red][\((-6,-\frac{7\pi}{6})\)]
+      \polarpoint{-4}{17*pi/3}[red][\((-4,\frac{17\pi}{3})\)]
+      \polarpoint{6}{-37*pi/3}[red][\((6,-\frac{37\pi}{3})\)]
+    \end{polargrid}
+
+    \newpage
+    \section{Transformation of Coordinates}
+    \label{sec:transformation-of-coordinates}
+    We know:
+      \begin{equation}
+        \label{eqn:polar-pythagorean}
+        \(r = \sqrt{x^2+y^2} \)
+      \end{equation}
+      \begin{equation}
+        \label{eqn:polar-theta}
+        \(\theta = \tan^{-1}(\frac{y}{x})\)
+      \end{equation}
+      \begin{equation}
+        \label{eqn:cart-x}
+        \(x = r\cos\theta\)
+      \end{equation}
+      \begin{equation}
+        \label{eqn:cart-y}
+        \(y = r\sin\theta\)
+      \end{equation}
+
+\subsection*{Convert to Polar Form}
+
+\begin{enumerate}
+    \item \((-5, -5)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = -5\), \(y = -5\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{(-5)^2 + (-5)^2} = \sqrt{50} = 5\sqrt{2}
+    \]
+    \(\theta\) lies in the \(3^{rd}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}\left(\frac{-5}{-5}\right) + \pi = \pi + \frac{\pi}{4} = \frac{5\pi}{4}
+    \]
+    
+    \(\therefore\) The required point is \(_p(5\sqrt{2}, \frac{5\pi}{4})\).
+
+    \item \(\left(4\sqrt{3}, 4\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = 4\sqrt{3}\), \(y = 4\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{(4\sqrt{3})^2 + 4^2} = \sqrt{48 + 16} = 8
+    \]
+    \(\theta\) lies in the \(1^{st}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}\left(\frac{4}{4\sqrt{3}}\right) = \frac{\pi}{6}
+    \]
+    
+    \(\therefore\) The required point is \(_p(8, \frac{\pi}{6})\).
+
+    \item \((0, -3)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = 0\), \(y = -3\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{0^2 + (-3)^2} = 3
+    \]
+    \(\theta\) lies on the negative \(y\)-axis. So,
+    \[
+    \theta = \frac{3\pi}{2}
+    \]
+    
+    \(\therefore\) The required point is \(_p(3, \frac{3\pi}{2})\).
+
+    \item \(\left(\sqrt{3}, -1\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = \sqrt{3}\), \(y = -1\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{(\sqrt{3})^2 + (-1)^2} = 2
+    \]
+    \(\theta\) lies in the \(4^{th}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}\left(\frac{-1}{\sqrt{3}}\right) = -\frac{\pi}{6}
+    \]
+    
+    \(\therefore\) The required point is \(_p(2, -\frac{\pi}{6})\).
+
+    \item \(\left(-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = -\frac{\sqrt{2}}{2}\), \(y = \frac{\sqrt{2}}{2}\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{\left(-\frac{\sqrt{2}}{2}\right)^2 + \left(\frac{\sqrt{2}}{2}\right)^2} = 1
+    \]
+    \(\theta\) lies in the \(2^{nd}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}(-1) + \pi = \frac{3\pi}{4}
+    \]
+    
+    \(\therefore\) The required point is \(_p(1, \frac{3\pi}{4})\).
+
+    \item \(\left(-2, 2\sqrt{3}\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = -2\), \(y = 2\sqrt{3}\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{(-2)^2 + (2\sqrt{3})^2} = 4
+    \]
+    \(\theta\) lies in the \(2^{nd}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}\left(-\sqrt{3}\right) + \pi = \frac{2\pi}{3}
+    \]
+    
+    \(\therefore\) The required point is \(_p(4, \frac{2\pi}{3})\).
+
+    \item \(\left(\frac{5\sqrt{3}}{2}, -\frac{5}{2}\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = \frac{5\sqrt{3}}{2}\), \(y = -\frac{5}{2}\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{\left(\frac{5\sqrt{3}}{2}\right)^2 + \left(-\frac{5}{2}\right)^2} = 5
+    \]
+    \(\theta\) lies in the \(4^{th}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}\left(-\frac{1}{\sqrt{3}}\right) = -\frac{\pi}{6}
+    \]
+    
+    \(\therefore\) The required point is \(_p(5, -\frac{\pi}{6})\).
+
+    \item \(\left(3\sqrt{2}, -3\sqrt{2}\right)\)
+    
+    \textbf{Solution:}
+    
+    Take \(x = 3\sqrt{2}\), \(y = -3\sqrt{2}\). From \crefrange{eqn:polar-pythagorean}{eqn:polar-theta},
+    \[
+    r = \sqrt{(3\sqrt{2})^2 + (-3\sqrt{2})^2} = 6
+    \]
+    \(\theta\) lies in the \(4^{th}\) quadrant. So,
+    \[
+    \theta = \tan^{-1}(-1) = -\frac{\pi}{4}
+    \]
+    
+    \(\therefore\) The required point is \(_p(6, -\frac{\pi}{4})\).
+\end{enumerate}
+
+\subsection*{Convert Polar Coordinates to Rectangular Form}
+
+\begin{enumerate}
+    \item \(\left( 3, \frac{\pi}{6} \right)\)
+    
+    \textbf{Solution:}
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = 3\cos\left(\frac{\pi}{6}\right) = 3 \cdot \frac{\sqrt{3}}{2} = \frac{3\sqrt{3}}{2}
+    \]
+    \[
+    y = 3\sin\left(\frac{\pi}{6}\right) = 3 \cdot \frac{1}{2} = \frac{3}{2}
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \(\left( \frac{3\sqrt{3}}{2}, \frac{3}{2} \right)\).
+    
+    \item \(\left( 5\sqrt{2}, -135^\circ \right)\)
+    
+    \textbf{Solution:}
+    
+    Convert \(-135^\circ\) to radians: \(-\frac{3\pi}{4}\).
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = 5\sqrt{2}\cos\left(-\frac{3\pi}{4}\right) = 5\sqrt{2} \cdot \left(-\frac{\sqrt{2}}{2}\right) = -5
+    \]
+    \[
+    y = 5\sqrt{2}\sin\left(-\frac{3\pi}{4}\right) = 5\sqrt{2} \cdot \left(-\frac{\sqrt{2}}{2}\right) = -5
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \((-5, -5)\).
+    
+    \item \((-4, 450^\circ)\)
+    
+    \textbf{Solution:}
+    
+    First find equivalent angle between \(0^\circ\) and \(360^\circ\):
+    \(450^\circ - 360^\circ = 90^\circ\).
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = -4\cos(90^\circ) = -4 \cdot 0 = 0
+    \]
+    \[
+    y = -4\sin(90^\circ) = -4 \cdot 1 = -4
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \((0, -4)\).
+    
+    \item \(\left( -2, \frac{11\pi}{6} \right)\)
+    
+    \textbf{Solution:}
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = -2\cos\left(\frac{11\pi}{6}\right) = -2 \cdot \frac{\sqrt{3}}{2} = -\sqrt{3}
+    \]
+    \[
+    y = -2\sin\left(\frac{11\pi}{6}\right) = -2 \cdot \left(-\frac{1}{2}\right) = 1
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \((-\sqrt{3}, 1)\).
+    
+    \item \(\left( -5, -\frac{5\pi}{6} \right)\)
+    
+    \textbf{Solution:}
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = -5\cos\left(-\frac{5\pi}{6}\right) = -5 \cdot \left(-\frac{\sqrt{3}}{2}\right) = \frac{5\sqrt{3}}{2}
+    \]
+    \[
+    y = -5\sin\left(-\frac{5\pi}{6}\right) = -5 \cdot \frac{1}{2} = -\frac{5}{2}
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \(\left( \frac{5\sqrt{3}}{2}, -\frac{5}{2} \right)\).
+    
+    \item \((3, -870^\circ)\)
+    
+    \textbf{Solution:}
+    
+    First find equivalent positive angle:
+    \(-870^\circ + 3 \times 360^\circ = 210^\circ\).
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = 3\cos(210^\circ) = 3 \cdot \left(-\frac{\sqrt{3}}{2}\right) = -\frac{3\sqrt{3}}{2}
+    \]
+    \[
+    y = 3\sin(210^\circ) = 3 \cdot \left(-\frac{1}{2}\right) = -\frac{3}{2}
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \(\left( -\frac{3\sqrt{3}}{2}, -\frac{3}{2} \right)\).
+    
+    \item \((-12, 0^\circ)\)
+    
+    \textbf{Solution:}
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = -12\cos(0^\circ) = -12 \cdot 1 = -12
+    \]
+    \[
+    y = -12\sin(0^\circ) = -12 \cdot 0 = 0
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \((-12, 0)\).
+    
+    \item \(\left( \sqrt{6}, \frac{\pi}{3} \right)\)
+    
+    \textbf{Solution:}
+    
+    Using \cref{eqn:cart-x} and \cref{eqn:cart-y}:
+    \[
+    x = \sqrt{6}\cos\left(\frac{\pi}{3}\right) = \sqrt{6} \cdot \frac{1}{2} = \frac{\sqrt{6}}{2}
+    \]
+    \[
+    y = \sqrt{6}\sin\left(\frac{\pi}{3}\right) = \sqrt{6} \cdot \frac{\sqrt{3}}{2} = \frac{3\sqrt{2}}{2}
+    \]
+    
+    \(\therefore\) The rectangular coordinates are \(\left( \frac{\sqrt{6}}{2}, \frac{3\sqrt{2}}{2} \right)\).
+\end{enumerate}
+
+
+  
+\end{document}
+

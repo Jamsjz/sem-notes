@@ -1,0 +1,289 @@
+\chapter{Cardiod Limacon and Lemniscates}
+\lecture{4}{6 May. 17:29}{}
+\label{chap:cardiod-limacon-and-lemniscates}
+
+\section{Cardioid}
+\label{sec:cardiod}
+
+\begin{definition}[Cardioid]
+  \label{def:cardiod}
+  A \textbf{cardioid} is a plane curve locus of a point on the perimeter of a circle as it rolls around a fixed circle of the same radius. In polar coordinates, the cardioid has the standard form:
+  \[
+    r = a(1 \pm \cos\theta) \quad \text{or} \quad r = a(1 \pm \sin\theta)
+  \]
+  where $a > 0$ is a constant that determines the size of the cardioid.
+  \href{https://youtu.be/SQdcqX94MWc?si=aSOYx60hIVEaqeGL}{Locus Animation of
+  Cardioid Formation}
+\end{definition}
+
+\paragraph{Sign Variations and Their Effects}
+The sign in front of the trigonometric function and the choice between sine and cosine determine the orientation of the cardioid:
+\begin{itemize}
+  \item $r = a(1 + \cos\theta)$: cardioid tail to the right (along the positive $x$-axis).
+  \item $r = a(1 - \cos\theta)$: cardioid tail to the left (along the negative $x$-axis).
+  \item $r = a(1 + \sin\theta)$: cardioid tail upward (along the positive $y$-axis).
+  \item $r = a(1 - \sin\theta)$: cardioid tail downward (along the negative $y$-axis).
+\end{itemize}
+
+\paragraph{Symmetry}
+Cardioids exhibit reflective symmetry:
+\begin{itemize}
+  \item Equations involving \(\cos\theta\) are symmetric about the horizontal axis ($x$-axis).
+  \item Equations involving \(\sin\theta\) are symmetric about the vertical axis ($y$-axis).
+\end{itemize}
+
+\href{https://www.desmos.com/calculator/yp6lc5cj80}{Play with it}
+
+\paragraph{Geometric Properties}
+\begin{itemize}
+  \item The curve has a cusp at the origin (pole).
+  \item The maximum radius is $2a$, and the minimum radius is $0$.
+%  \item The total length of the curve is $8a$.
+%  \item The area enclosed by the cardioid is $6\pi a^2$.
+\end{itemize}
+
+\section{Limacon}
+\label{sec:limacon}
+
+\begin{definition}[Limacon]
+  \label{def:limacon}
+  A \textbf{Limacon} is a polar curve defined by the equation:
+  \[
+    r = a \pm b\cos\theta \quad \text{or} \quad r = a \pm b\sin\theta
+  \]
+  where \( a, b \in \mathbb{R} \), and the shape of the curve depends on the
+  ratio \( \frac{a}{b} \).
+  \href{https://youtu.be/5dEHo6FtG44?si=V77Po4mnSVCNeUrX}{Detailed Explanation
+  and Graphing}
+\end{definition}
+
+\paragraph{Types of Limacons Based on \(\frac{a}{b}\)}
+Let us analyze the curve based on the relative magnitudes of \( a \) and \( b \):
+
+\begin{itemize}
+  \item \textbf{Case 1: \( a < b \)} (inner loop limacon) 
+
+    The curve has an inner loop. It crosses the origin and forms a loop inside the main body. The smaller the ratio \( \frac{a}{b} \), the larger the inner loop.
+
+  \item \textbf{Case 2: \( a = b \)} (cardioid)
+
+    When \( a = b \), the limacon becomes a cardioid. See Definition~\ref{def:cardiod}.
+
+  \item \textbf{Case 3: \( a > b \)} (dimpled or convex limacon) 
+
+    \begin{itemize}
+      \item If \( \frac{a}{b} > 2 \), the curve resembles a nearly circular convex limacon.
+      \item If \( \frac{a}{b} = 2 \), the curve develops a dimple(flat) at the pole.
+      \item If \( \frac{a}{b} < 2 \), the curve has a pronounced dimple but no inner loop.
+    \end{itemize}
+
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Type} & \textbf{Relation between \( a \) and \( b \)} \\
+    \hline
+    Inner Loop    & \( a < b \) \\
+    Cardioid      & \( a = b \) \\
+    Dimpled       & \( b < a < 2b \) \\
+    Convex        & \( a \geq 2b \) \\
+    \hline
+  \end{tabular}
+  \label{tab:limacon-summary}
+  \caption{Summary Table of Limacon Types}
+\end{table}
+
+\paragraph{Orientation Based on Trigonometric Function and Sign}
+\begin{itemize}
+  \item \( r = a + b\cos\theta \): curve tail toward the right.
+  \item \( r = a - b\cos\theta \): curve tail toward the left.
+  \item \( r = a + b\sin\theta \): curve tail upward.
+  \item \( r = a - b\sin\theta \): curve tail downward.
+\end{itemize}
+
+\href{https://www.desmos.com/calculator/sy2ovrnwpp}{Play with it.}
+
+\paragraph{Symmetry}
+Limacons, like cardioids, exhibit reflective symmetry:
+\begin{itemize}
+  \item Equations with \(\cos\theta\) are symmetric about the $x$-axis.
+  \item Equations with \(\sin\theta\) are symmetric about the $y$-axis.
+\end{itemize}
+
+\paragraph{Geometric Notes}
+\begin{itemize}
+  \item The limacon can have an inner loop, be dimpled, or convex depending on parameters.
+  \item It has reflective symmetry based on its trigonometric form.
+\end{itemize}
+
+\section{Graphing of Limacons}
+\label{sec:graphing-limacons}
+
+\begin{exercise}
+  Plot the curve \(r = 2 + 3\sin\theta\), an inner loop limacon.
+\end{exercise}
+\begin{answer}
+  \begin{enumerate}
+    \item At pole: \(r = 0 \Rightarrow 2 + 3\sin\theta = 0 \Rightarrow \sin\theta = -\frac{2}{3}\)
+    \item Symmetry: about vertical (y) axis.
+    \item Use polar coordinates to plot.
+  \end{enumerate}
+\end{answer}
+\begin{figure}[H]
+  \centering
+  \begin{polargrid}[5][5][12][5][1.0]
+    \draw[domain=0:360,smooth,variable=\t,red,thick]
+    plot ({(2 + 3*sin(\t)) * cos(\t)}, {(2 + 3*sin(\t)) * sin(\t)});
+  \end{polargrid}
+  \caption{Plot of \(r = 2 + 3\sin\theta\)}
+  \label{fig:plot-2+3sintheta}
+\end{figure}
+
+\begin{exercise}
+  Plot the curve \(r = 3 + 2\cos\theta\), a dimpled limacon.
+\end{exercise}
+\begin{answer}
+  \begin{enumerate}
+    \item At pole: \(r = 0 \Rightarrow \cos\theta = -\frac{3}{2}\) (no solution).
+    \item Symmetry: about horizontal (x) axis.
+  \end{enumerate}
+\end{answer}
+\begin{figure}[H]
+  \centering
+  \begin{polargrid}[5][5][12][5][1.0]
+    \draw[domain=0:360,smooth,variable=\t,blue,thick]
+    plot ({(3 + 2*cos(\t)) * cos(\t)}, {(3 + 2*cos(\t)) * sin(\t)});
+  \end{polargrid}
+  \caption{Plot of \(r = 3 + 2\cos\theta\)}
+  \label{fig:plot-3+2costheta}
+\end{figure}
+
+\begin{exercise}
+  Plot the curve \(r = 4 + 2\sin\theta\), a convex limacon.
+\end{exercise}
+\begin{answer}
+  \begin{enumerate}
+    \item At pole: \(r = 0 \Rightarrow \sin\theta = -2\) (no solution).
+    \item Symmetry: about vertical (y) axis.
+  \end{enumerate}
+\end{answer}
+\begin{figure}[H]
+  \centering
+  \begin{polargrid}[6][6][12][6][1.0]
+    \draw[domain=0:360,smooth,variable=\t,purple,thick]
+    plot ({(4 + 2*sin(\t)) * cos(\t)}, {(4 + 2*sin(\t)) * sin(\t)});
+  \end{polargrid}
+  \caption{Plot of \(r = 4 + 2\sin\theta\)}
+  \label{fig:plot-4+2sintheta}
+\end{figure}
+
+\begin{exercise}
+  Plot the curve \(r = 6 + 2\cos\theta\), a convex limacon.
+\end{exercise}
+\begin{answer}
+  \begin{enumerate}
+    \item At pole: \(r = 0 \Rightarrow \cos\theta = -3\) (no solution).
+    \item Symmetry: about horizontal (x) axis.
+  \end{enumerate}
+\end{answer}
+\begin{figure}[H]
+  \centering
+  \begin{polargrid}[8][8][12][8][0.8]
+    \draw[domain=0:360,smooth,variable=\t,green!60!black,thick]
+    plot ({(6 + 2*cos(\t)) * cos(\t)}, {(6 + 2*cos(\t)) * sin(\t)});
+  \end{polargrid}
+  \caption{Plot of \(r = 6 + 2\cos\theta\)}
+  \label{fig:plot-6+2costheta}
+\end{figure}
+
+\section{Rose Petals or Flowers}
+\label{sec:rose-petals-or-flowers}
+
+\begin{definition}
+  A rose curve is a polar graph defined by equations of the form:
+  \[
+    r = a \cos(m\theta) \quad \text{or} \quad r = a \sin(m\theta)
+  \]
+  where \( a \) and \( m \) are real constants. The shape resembles petals of a flower.
+
+  \href{https://www.geogebra.org/m/PaDEfVP3}{Play with it.}
+\end{definition}
+
+\begin{remark}
+  The number of petals in a rose curve depends on whether \( m \) is odd or even:
+  \begin{itemize}
+    \item If \( m \) is \textbf{odd} , the curve has exactly \( m \) petals.
+    \item If \( m \) is \textbf{even} , the curve has \( 2m \) petals.
+  \end{itemize}
+  This rule applies for both sine and cosine cases.
+\end{remark}
+
+\begin{eg}
+  Let \( r = 2\cos(3\theta) \). Here, \( m = 3 \) is odd, so the graph has 3 petals.
+
+
+  \begin{figure}[H]
+    \centering
+    \begin{polargrid}[2][2][12][2.2][1.2]
+      \draw[domain=0:360,smooth,variable=\t,blue,thick]
+      plot ({2*cos(3*\t)*cos(\t)}, {2*cos(3*\t)*sin(\t)});
+    \end{polargrid}
+    \caption{Plot of \( r = 2\cos(3\theta) \)}
+    \label{fig:rose-2cos3theta}
+  \end{figure}
+
+  Let \( r = 4\sin(2\theta) \). Here, \( m = 2 \) is even, so the graph has \( 2 \times 2 = 4 \) petals.
+
+  \begin{figure}[H]
+    \centering
+    \begin{polargrid}[4][4][12][4.0][1.0]
+      \draw[domain=0:360,smooth,variable=\t,red,thick]
+      plot ({4*sin(2*\t)*cos(\t)}, {4*sin(2*\t)*sin(\t)});
+    \end{polargrid}
+    \caption{Plot of \( r = 4\sin(2\theta) \)}
+    \label{fig:rose-4sin2theta}
+  \end{figure}
+\end{eg}
+
+\begin{remark}
+  The symmetry of rose curves also depends on the trigonometric function:
+  \begin{itemize}
+    \item \( \cos(m\theta) \) curves are symmetric about the x-axis.
+    \item \( \sin(m\theta) \) curves are symmetric about the y-axis
+      (for odd \( m \)) or origin (for even \( m \)).
+  \end{itemize}
+\end{remark}
+
+\section{Lemniscates}
+\label{sec:lemniscates}
+
+\begin{definition}
+  A lemniscate is a polar curve that resembles a figure-eight or infinity
+  symbol. The general form is:
+  \[
+    r^2 = a^2 \cos(2\theta) \quad \text{or} \quad r^2 = a^2 \sin(2\theta)
+  \]
+  These curves are symmetric and bounded, typically having two loops.
+
+  \href{https://www.desmos.com/calculator/blv5epd0gc}{Desmos Graph}\\
+  \href{https://www.geogebra.org/m/Z9T8AUBe}{Play with it.}
+\end{definition}
+
+\begin{remark}
+  The symmetry of lemniscates depends on the trigonometric function:
+  \begin{itemize}
+    \item \( r^2 = a^2 \cos(2\theta) \): symmetric about the x-axis.
+    \item \( r^2 = a^2 \sin(2\theta) \): symmetric about the origin or y = x
+      line.
+  \end{itemize}
+\end{remark}
+
+\begin{eg}
+  Let \( r^2 = 4\sin(2\theta) \), which implies \( a^2 = 4 \Rightarrow a = 2 \).
+  This is a lemniscate symmetric about the origin.\\
+
+  Let \( r^2 = 4\cos(2\theta) \), again with \( a^2 = 4 \Rightarrow a = 2 \).
+  This is a lemniscate symmetric about the x-axis.
+\end{eg}

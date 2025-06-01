@@ -1,0 +1,183 @@
+\chapter{Polar Curve}
+\label{chap:polar-curve}
+\lecture{3}{28 Apr. 22:52}{Polar Curves}
+
+\begin{definition}[Polar Curve]
+  \label{def:polar-curve}
+  \begin{equation}
+    \label{eqn:polar-curve}
+    \begin{displaystyle}
+      r = f(\theta)
+    \end{displaystyle}
+  \end{equation}
+\end{definition}
+
+\section{Symetricity of \(r=f(\theta)\)}
+\label{sec:symetricity-of-r-f-theta}
+
+\begin{enumerate}
+  \item Given \((r,\theta)\) lies in \(r=f(\theta)\),
+    \[
+      (r,-\theta) \text{ or } (-r,\pi-\theta) \text{ in  } r
+      = f(\theta) \implies r = f(\theta) \text{ is symmetric
+      abt. x-axis. }
+    \]
+    \begin{eg}
+      \(r=1+\cos\theta\) \quad (true)\\
+      \(r=2a\sin\theta\) \quad (false)\\
+      \(r=2a\sin2\theta\) \quad (false)
+    \end{eg}
+
+  \item Given \((r,\theta)\) lies in \(r=f(\theta)\),
+    \[
+      (-r,-\theta) \text{ or } (r,\pi-\theta) \text{ in  } r
+      = f(\theta) \implies r = f(\theta) \text{ is symmetric
+      abt. y-axis. }
+    \]
+    \begin{eg}
+      \(r=1+\cos\theta\) \quad (false)\\
+      \(r=2a\sin\theta\) \quad (true)\\
+      \(r^{2}=\cos2\theta\) \quad (true)
+    \end{eg}
+
+  \item Given \((r,\theta)\) lies in \(r=f(\theta)\),
+    \[
+      (-r,\theta) \text{ or } (r,\pi+\theta) \text{ in  } r
+      = f(\theta) \implies r = f(\theta) \text{ is symmetric
+      abt. pole. }
+    \]
+    \begin{eg}
+      \(r=1+\cos\theta\) \quad (false)\\
+      \(r=\sin\theta\) \quad (false)\\
+      \(r=\sin2\theta\) \quad (true)\\
+      \(r^2=\sin2\theta\) \quad (true)
+    \end{eg}
+
+\end{enumerate}
+
+\begin{table}[htpb]
+  \centering
+  \resizebox{0.8\textwidth}{!}{ 
+    \begin{tabular}{|c|cc|}
+      \hline
+      \textbf{x-axis}&\((r,-\theta)\)&\((-r,\pi-\theta)\)\\
+      \hline
+      \textbf{y-axis}&\((r,\pi-\theta)\)&\((-r,-\theta)\)\\
+      \hline
+      \textbf{pole}&\((r,\pi+\theta)\)&\((-r,\theta)\)\\
+      \hline
+    \end{tabular}
+  }
+  \caption{Summary of Symmetricity of \(r=f(\theta)\)}
+  \label{tab:summary-of-symmetricity-of-r-f-theta-}
+\end{table}
+
+\section{Slope of \(r=f(\theta)\)}
+\label{sec:slope-of-r-f-theta}
+Given a polar curve \( r = f(\theta) \), we can express the Cartesian coordinates as
+\[
+  x = r\cos\theta = f(\theta)\cos\theta, \qquad y = r\sin\theta = f(\theta)\sin\theta.
+\]
+
+The slope of the tangent to the curve at a point is
+\[
+  \frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}}.
+\]
+
+Differentiating \( x \) and \( y \) with respect to \( \theta \) (using the product rule):
+\begin{align*}
+  \frac{dx}{d\theta} &= \frac{d}{d\theta}\left( f(\theta)\cos\theta \right) = f'(\theta)\cos\theta - f(\theta)\sin\theta, \\
+  \frac{dy}{d\theta} &= \frac{d}{d\theta}\left( f(\theta)\sin\theta \right) = f'(\theta)\sin\theta + f(\theta)\cos\theta.
+\end{align*}
+
+Therefore, the slope at \( \theta = \theta_0 \) is
+\[
+  \left. \frac{dy}{dx} \right|_{\theta = \theta_0}
+    = 
+    \left.
+      \frac{f'(\theta)\sin\theta + f(\theta)\cos\theta}
+      {f'(\theta)\cos\theta - f(\theta)\sin\theta}
+      \right|_{\theta = \theta_0}.
+    \]
+
+    \bigskip
+
+    \textbf{Slope at the Pole:}
+
+    The \emph{pole} corresponds to \( r = f(\theta_0) = 0
+    \). At the pole, the expressions simplify:
+    \begin{align*}
+      \left. \frac{dy}{dx} \right|_{r=0,\,\theta = \theta_0}
+&= \frac{f'(\theta_0)\sin\theta_0}{f'(\theta_0)\cos\theta_0} \\
+&= \tan\theta_0 \qquad \text{(provided \( f'(\theta_0) \neq 0 \)).}
+    \end{align*}
+
+    Thus, \textbf{the slope of the tangent at the pole is \(
+    \tan\theta_0 \)}, provided the curve passes through the
+    pole at \( \theta_0 \) and \( f'(\theta_0) \neq 0 \).
+
+    \section{Graphing a Polar Curve}
+    \label{sec:graphing-a-polar-curve}
+    \begin{exercise}
+      Plot the curve \(r=1+\cos\theta\), a cardiod(heart-shaped).
+    \end{exercise}
+    \begin{answer}
+      The following is the process for graphing given curve.
+      \begin{enumerate}
+        \item Find the slope at pole:\\
+          At pole, \(r=0\)\\
+          We have,
+          \begin{align*}
+            r &= 1 + \cos\theta \\
+            \text{Set } r = 0: \quad 0 &= 1 + \cos\theta \\
+            \cos\theta &= -1 \\
+            \theta &= \pi, \quad n \in \Z\\
+            \therefore \tan\theta_o &= 0
+          \end{align*}
+
+        \item Find the Symmetricity of the curve:\\
+          The curve is symmetric about only x-axis.
+
+        \item Make \(r-\theta\) table for specific points.
+
+      \end{enumerate}
+    \end{answer}
+
+    \begin{table}[htpb]
+      \centering
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \(\theta\) & \(0\) & \(\frac{\pi}{6}\) &
+        \(\frac{\pi}{4}\) & \(\frac{\pi}{3}\) &
+        \(\frac{\pi}{2}\) & \(\frac{2\pi}{3}\) &
+        \(\frac{3\pi}{4}\) & \(\frac{5\pi}{6}\) &
+        \(\pi\)\\
+
+        \hline
+
+        \(r = 1+\cos(\theta)\) & \(2\) & \(1 +
+        \frac{\sqrt{3}}{2}\) & \(1 +
+        \frac{\sqrt{2}}{2}\) & \(1 + \frac{1}{2}\) &
+        \(1\) & \(1 - \frac{1}{2}\) & \(1 -
+        \frac{\sqrt{2}}{2}\) & \(1 -
+        \frac{\sqrt{3}}{2}\) & \(0\)\\
+
+        \hline
+      \end{tabular}
+      \caption{r-\(\theta\) Table}
+      \label{tab:r-theta-table}
+    \end{table}
+
+    \textbf{Plot:}
+    \begin{figure}[H]
+      \centering
+      \begin{polargrid}[2][2][12][2.2][1.2]
+        \draw[domain=0:180,smooth,variable=\t,red,thick]
+        plot ({(1+cos(\t)) * cos(\t)}, {(1+cos(\t)) * sin(\t)});
+        \draw[domain=180:360,smooth,variable=\t,blue,thick]
+        plot ({(1+cos(\t)) * cos(\t)}, {(1+cos(\t)) * sin(\t)});
+      \end{polargrid}
+      \caption{Plot of \(r=1+\cos\theta\)}
+      \label{fig:plot-of-r-1-cos-theta}
+    \end{figure}
+

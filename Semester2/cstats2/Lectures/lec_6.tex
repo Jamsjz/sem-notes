@@ -1,0 +1,77 @@
+\chapter{Hypergeometric Distribution}
+\label{chap:hypergeometric-distribution}
+\lecture{6}{2 Jun. 02:50}{Sixth Lecture}
+
+\subsection{Introduction}
+\label{ssec:introduction-hypergeometric-distribution}
+
+The Hypergeometric Distribution is used to model the probability of \(x\)
+successes in \(n\) draws, \textit{without replacement}, from a finite population
+of size \(N\) that contains exactly \(m\) successes. This contrasts with the
+Binomial distribution, where draws are made \textit{with replacement} (or from a
+very large population), ensuring that the probability of success remains
+constant for each trial (i.e., trials are independent
+\href{def:bernoulli-process}{Bernoulli Trials}).
+
+\begin{eg}
+  Consider an urn containing \(N=10\) balls. Of these, \(m=6\) are green
+  (successes) and \(N-m=4\) are blue (failures).
+  We draw a sample of \(n=3\) balls from the urn without replacement.
+  We want to find the probability that exactly \(x=2\) of the drawn balls are
+  green (and thus \(n-x = 3-2=1\) ball is blue).
+
+  Let \(X\) be the \href{def:random-variable}{Random Variable} representing the
+  number of green balls in our sample of 3.
+  The number of ways to choose 2 green balls from the 6 available green balls is
+  \(\binom{m}{x} = \binom{6}{2}\).
+  The number of ways to choose 1 blue ball from the 4 available blue balls is
+  \(\binom{N-m}{n-x} = \binom{4}{1}\).
+  The total number of ways to choose any 3 balls from the 10 available balls is
+  \(\binom{N}{n} = \binom{10}{3}\).
+
+  So, the probability of drawing exactly 2 green balls is:
+  \[ P[X=2] = \frac{\binom{6}{2} \binom{4}{1}}{\binom{10}{3}} \]
+  Calculating the combinations:
+  \begin{itemize}
+    \item \(\binom{6}{2} = \frac{6!}{2!(6-2)!} = \frac{6 \times 5}{2 \times 1} = 15\)
+    \item \(\binom{4}{1} = \frac{4!}{1!(4-1)!} = \frac{4}{1} = 4\)
+    \item \(\binom{10}{3} = \frac{10!}{3!(10-3)!} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = 10 \times 3 \times 4 / (3 \times 1) = 120\)
+  \end{itemize}
+  Therefore,
+  \[ P[X=2] = \frac{15 \times 4}{120} = \frac{60}{120} = \frac{1}{2} \]
+  Here, \(X\) is a random variable that follows a Hypergeometric Distribution.
+\end{eg}
+
+\section{Definition}
+\label{sec:definition-hypergeometric-distribution}
+
+\begin{definition}
+  A \textbf{Hypergeometric Distribution} describes the probability of \(x\) successes in \(n\) draws, without replacement, from a finite population of size \(N\) where \(m\) objects are classified as successes and \(N-m\) objects are classified as failures.
+
+  The parameters of the Hypergeometric distribution are:
+  \begin{itemize}
+    \item \(N\): The total number of items in the population.
+    \item \(m\): The total number of items in the population that are classified as successes. (\(0 \le m \le N\))
+    \item \(n\): The number of items drawn in a sample from the population (the sample size). (\(0 \le n \le N\))
+  \end{itemize}
+  The random variable \(X\) represents the number of successes in the sample of size \(n\). The value of \(x\) (a specific outcome for \(X\)) must satisfy:
+  \[ \max(0, n - (N-m)) \le x \le \min(n, m) \]
+  This ensures that we don't try to choose more successes (or failures) than are available, or more items than are in the sample.
+\end{definition}
+
+\section{\href{def:probability-mass-function}{PMF} of Hypergeometric Distribution}
+\label{sec:pmf-of-hypergeometric-distribution}
+For the random variable \(X\) that represents the number of successes in a sample of size \(n\) drawn without replacement from a population of size \(N\) containing \(m\) successes.
+The probability mass function (PMF) is given by:
+\begin{equation}
+  \label{eqn:pmf-of-hypergeometric-distribution}
+  \boxed{P[X=x] = \frac{\binom{m}{x} \binom{N-m}{n-x}}{\binom{N}{n}}}
+\end{equation}
+where:
+\begin{itemize}
+  \item \(x\) is the number of successes in the sample.
+  \item \(\binom{a}{b}\) is the binomial coefficient, representing "a choose b", calculated as \(\frac{a!}{b!(a-b)!}\).
+  \item The support for \(x\) is \(\max(0, n - (N-m)) \le x \le \min(n, m)\). For values of \(x\) outside this range, \(P[X=x] = 0\).
+\end{itemize}
+
+\end{document} % Add this if it's meant to be a standalone compilable document

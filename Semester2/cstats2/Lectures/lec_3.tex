@@ -1,0 +1,137 @@
+\chapter{Poisson Distribution}
+\label{chap:poisson-distribution}
+\lecture{3}{15 May. 11:00}{Third Lecture}
+
+\begin{eg}[Simpler Example: Customers at a Cafe]
+  \label{ex:cafe-customers}
+  Imagine a small cafe where, on average, 2 customers arrive every minute during the lunch rush. We want to find the probability that exactly 5 customers will arrive in a specific one-minute interval during this period. This scenario can be modeled using the Poisson distribution.
+
+  Here, the factors of the Poisson distribution are:
+  \begin{itemize}
+    \item \(\lambda\) (lambda): The average rate of arrivals. In this case, \(\lambda = 2\) customers per minute. This average is assumed to be constant during the lunch rush period.
+    \item \(x\): The specific number of arrivals we are interested in. Here, \(x = 5\) customers.
+    \item \(e\): Euler's number, approximately 2.71828.
+  \end{itemize}
+
+  \textbf{Explanation of "specific one-minute interval":}
+  The term "specific one-minute interval" refers to any chosen single minute
+  within the timeframe where the average arrival rate (\(\lambda=2\)
+  customers/minute) is valid – in this case, during the lunch rush. It
+  doesn't mean a pre-selected or unique minute, but rather \emph{any} individual minute you decide to observe. For example:
+  \begin{itemize}
+    \item The minute from 12:05 PM to 12:06 PM.
+    \item The minute from 1:10 PM to 1:11 PM.
+    \item Any other one-minute slot during the lunch rush.
+  \end{itemize}
+  The Poisson distribution calculates the probability of observing \(x\) events (5 customers) in such a defined interval, assuming the rate \(\lambda\) is constant across all such intervals and events occur independently. So, for any given minute you pick during the lunch rush, the probability of 5 customers arriving in \emph{that particular minute} is what we are calculating.
+
+  The probability mass function (PMF) for the Poisson distribution is:
+  \[ P(X=x) = \frac{e^{-\lambda} \lambda^x}{x!} \]
+  We want to calculate \(P(X=5)\) when \(\lambda=2\).
+
+  Plugging the values into the formula:
+  \[ P(X=5) = \frac{e^{-2} \cdot 2^5}{5!} \]
+
+  Let's break down the calculation:
+  \begin{itemize}
+    \item \(e^{-2} \approx 0.135335\)
+    \item \(2^5 = 32\)
+    \item \(5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\)
+  \end{itemize}
+
+  So,
+  \[ P(X=5) = \frac{0.135335 \times 32}{120} \]
+  \[ P(X=5) = \frac{4.33072}{120} \]
+  \[ P(X=5) \approx 0.036089 \]
+
+  Therefore, the probability of exactly 5 customers arriving in any specific one-minute interval during the lunch rush is approximately 0.0361, or about 3.61%. This demonstrates how the Poisson distribution uses the average rate (\(\lambda\)) to predict the likelihood of a specific number of events (\(x\)) occurring in a fixed interval of time[19].
+\end{eg}
+
+\section{Introduction}
+It is used to model the probability of a given number of events
+occurring within a fixed interval of time or space, assuming these events happen
+with a known constant mean rate and independently of the time since the last
+event.
+
+\begin{definition}[Poisson Distribution]
+  \label{def:poisson}
+  A discrete random variable \(X\) is said to follow a Poisson distribution if its probability mass function (PMF) is given by:
+  \[ P(X=x) = \frac{e^{-\lambda} \lambda^x}{x!} \]
+  for \(x = 0, 1, 2, \ldots\)\marginpar{\(\lambda > 0\)}.
+  Here:
+  \begin{itemize}
+    \item \(x\) is the number of occurrences of an event (a non-negative integer).
+    \item \(\lambda\) (lambda) is the average number of events occurring in the given interval. It is the sole parameter of the distribution.
+    \item \(e\) is Euler's number (approximately 2.71828).
+    \item \(x!\) is the factorial of \(x\).
+  \end{itemize}
+  The notation for a random variable \(X\) following a Poisson distribution with mean \(\lambda\) is \(X \sim \mathcal{P}(\lambda)\) or \(X \sim \text{Poisson}(\lambda)\).
+  Conditions for using Poisson distribution include:
+  \begin{itemize}
+    \item Events occur at random and independently. The occurrence of one event does not affect the probability of another event.
+    \item The mean number of events (\(\lambda\)) occurring within a given interval is known and constant.
+  \end{itemize}
+\end{definition}
+
+\section{Meaning of \(P(X=x)\)}
+The expression \(P(X=x)\) represents the probability that exactly \(x\) events will occur in a specified interval of time or space. For instance, if \(X\) represents the number of emails received per hour and \(X \sim \mathcal{P}(10)\), meaning on average 10 emails are received per hour, then \(P(X=5)\) would be the probability of receiving exactly 5 emails in a particular hour. This is calculated using the Poisson formula:
+\[ P(X=5) = \frac{e^{-10} 10^5}{5!} \]
+The value of \(x\) can be any non-negative integer (0, 1, 2, ...), reflecting that there's theoretically no upper limit to the number of events that can occur.
+
+\section{Derivation of Expectation and Variance}
+For a Poisson-distributed random variable \(X \sim \mathcal{P}(\lambda)\), the expectation (mean) and variance are both equal to \(\lambda\). \marginpar{Mean = Variance = \(\lambda\)}
+
+\subsection{Expectation \(E[X]\)}
+The expectation of a discrete random variable \(X\) is given by \(E[X] = \sum_{x=0}^{\infty} x P(X=x)\).
+\begin{align*}
+  E[X] &= \sum_{x=0}^{\infty} x \frac{e^{-\lambda} \lambda^x}{x!} \\
+       &= e^{-\lambda} \sum_{x=1}^{\infty} x \frac{\lambda^x}{x!} \quad (\text{The term for } x=0 \text{ is } 0) \\
+       &= e^{-\lambda} \sum_{x=1}^{\infty} \frac{\lambda^x}{(x-1)!} \\
+  \text{Let } k = x-1, \text{ so } x = k+1. &\text{ When } x=1, k=0. \\
+  E[X] &= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^{k+1}}{k!} \\
+       &= e^{-\lambda} \lambda \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+  \text{Since } \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} = e^{\lambda} &\text{ (Taylor series expansion of } e^{\lambda}), \\
+  E[X] &= e^{-\lambda} \lambda e^{\lambda} \\
+       &= \lambda \label{eq:poisson_expectation}
+\end{align*}
+Thus, the expectation of a Poisson distribution is \(\lambda\).
+
+\subsection{Variance \(\text{Var}(X)\)}
+The variance of a random variable \(X\) is given by \(\text{Var}(X) = E[X^2] - (E[X])^2\).
+First, we calculate \(E[X(X-1)]\):
+\begin{align*}
+  E[X(X-1)] &= \sum_{x=0}^{\infty} x(x-1) \frac{e^{-\lambda} \lambda^x}{x!}  \\
+            &= e^{-\lambda} \sum_{x=2}^{\infty} x(x-1) \frac{\lambda^x}{x!} \quad (\text{Terms for } x=0, 1 \text{ are } 0) \\
+            &= e^{-\lambda} \sum_{x=2}^{\infty} \frac{\lambda^x}{(x-2)!} \\
+  \text{Let } j = x-2, \text{ so } x = j+2. &\text{ When } x=2, j=0. \\
+  E[X(X-1)] &= e^{-\lambda} \sum_{j=0}^{\infty} \frac{\lambda^{j+2}}{j!} \\
+            &= e^{-\lambda} \lambda^2 \sum_{j=0}^{\infty} \frac{\lambda^j}{j!}  \\
+            \text{Since } \sum_{j=0}^{\infty} \frac{\lambda^j}{j!} = e^{\lambda}, \\
+  E[X(X-1)] &= e^{-\lambda} \lambda^2 e^{\lambda} \\
+            &= \lambda^2 
+\end{align*}
+We know that \(E[X(X-1)] = E[X^2 - X] = E[X^2] - E[X]\).
+So, \(E[X^2] = E[X(X-1)] + E[X]\).
+Using \(E[X] = \lambda\) and \(E[X(X-1)] = \lambda^2\):
+\[ E[X^2] = \lambda^2 + \lambda \label{eq:poisson_ex2} \]
+Now, we can find the variance:
+\begin{align*}
+  \text{Var}(X) &= E[X^2] - (E[X])^2 \\
+                &= (\lambda^2 + \lambda) - (\lambda)^2 \\
+                &= \lambda^2 + \lambda - \lambda^2 \\
+                &= \lambda \label{eq:poisson_variance}
+\end{align*}
+Thus, the variance of a Poisson distribution is also \(\lambda\). \marginpar{Standard deviation \(\sigma = \sqrt{\lambda}\)}
+
+\section{Applications of Poisson Distribution}
+The Poisson distribution is a versatile tool used in various fields to model the number of occurrences of an event over a specific interval. Some key applications include:
+\begin{itemize}
+  \item \textbf{Telecommunications:} Predicting the number of calls arriving at a call center per hour, or the number of network failures per week. This helps in staffing and resource allocation.
+  \item \textbf{Quality Control:} Modeling the number of defects or errors in a manufactured product (e.g., defects per square meter of material or per batch of items).
+  \item \textbf{Finance and Insurance:} Estimating the number of insurance claims per month or bankruptcies filed per month.
+  \item \textbf{Biology and Medicine:} Counting the number of bacteria in a culture, radioactive decay particles per minute, or instances of a rare disease in a population. \href{https://www.studypug.com/statistics-help/poisson-distribution}{Ecology example from StudyPug} could involve modeling the number of trees affected by a disease per acre.
+  \item \textbf{Astronomy:} Modeling the number of meteorites of a certain size striking the Earth in a year.
+  \item \textbf{Traffic Engineering:} Predicting the number of cars arriving at an intersection or a toll booth in a specific time interval.
+  \item \textbf{Retail Management:} Forecasting customer arrivals at a store or checkout queues, helping in optimizing staff schedules and queue management.
+\end{itemize}
+The Poisson distribution is particularly useful for modeling rare events or counting processes where events occur independently and at a constant average rate.

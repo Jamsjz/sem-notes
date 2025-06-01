@@ -1,0 +1,51 @@
+\chapter{Binomial Distribution}
+\lecture{2}{28 Apr. 21:51}{Second Lecture}
+\label{chap:binomial-distribution}
+
+\input{Lectures/lec2/binomial_distribution.tex}
+
+\section{Probability Distribution for Bernoulli Trial}
+\label{sec:bernoulli-distribution}
+The distribution resulted by \hyperref[eqn:binomial-distribution]{this probability mass
+function} for \(n=1\).
+\[ P_X(r) = p^{r} \] Here, \(r\in \{0,1\} \) since there cannot be more than 1
+success in one trial. It is a special case of \href{Binomial
+Distribution}{sec:binomial-distribution}
+
+\begin{enumerate}
+  \item \(\mu=p\)
+  \item \(\sigma^{2}=p(1-p)=pq\)
+\end{enumerate}
+
+\section{Binomial Distribution}
+\label{sec:binomial-distribution}
+The distribution resulted by
+\hyperref[eqn:binomial-distribution]{this probability mass
+function} is a binomial distribution.
+
+\subsection{Symmetricity of Binomial Distribution}
+\label{ssec:symmetricity-of-binomial-distribution}
+
+\begin{remark}
+  If \(p=0.5\), distribution is symmetric\\
+  \begin{explanation}
+    If probability of success is same as the failure, there
+    is no skewness in the distribution.\\
+  \end{explanation}
+
+  If \(p<0.5\), distribution is skewed right(+ve).
+  \begin{explanation}
+    If \(p\) is less than \(q\), there will be low chances
+    of success so distribution will be skewed to left.\\
+  \end{explanation}
+
+  If \(p>0.5\), distribution is skewed left(-ve).
+  \begin{explanation}
+    If \(p\) is more than \(q\), there will be high chances
+    of success so distribution will be skewed to right.\\
+  \end{explanation}
+
+  \textbf{When \(n\) is sufficiently large, binomial distribution is symmetric.}
+\end{remark}
+
+\input{Lectures/lec2/expectation_and_variance.tex}
