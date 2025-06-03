@@ -15,6 +15,7 @@
 # =========================================================================
 # Allow .gitignore files (this file itself)
 !.gitignore
+!.index.html
 
 # Allow .tex files anywhere
 !*.tex
