@@ -36,7 +36,7 @@
 # This rule ensures all its contents (files and sub-folders) are kept.
 !**/Figures/**
 
-!.index.html
+!index.html
 
 # =========================================================================
 # === Allow specific file types in specific folders ===
