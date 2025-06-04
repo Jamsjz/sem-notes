@@ -9,29 +9,36 @@ One can also check the concavity of the surface.
 
 \section{Critical Points}
 \label{sec:critical-points}
-A critical point is a point where \(f_x=f_y=0\) or \(f_x\) or \(f_y\) is
+A critical point is a point \((a,b,f(a,b))\) where \(f_x=f_y=0\) or \(f_x\) or \(f_y\) is
 undefined.
 
 \section{Saddle Points}
 \label{sec:saddle-points}
-If a point \((a,b,f(a,b))\) is a \href{sec:critical-points}{critical point} and
-if \[ \forall (x-a)^2 + (y-b)^2 = r^2, \]
+If a point \((a,b,f(a,b))\) is a \href{sec:critical-points}{stationary point}
+and if,
 \[\exists (x,y) \text{ s.t. } f(x,y)>f(a,b) \text{ somewhere } \land
 f(x,y)<f(a,b) \text{ elsewhere }\]
 Then, \((a,b,f(a,b))\) is a saddle point.
 
 \section{Hessin/Discriminant of \(f\): \(D_f\)}
 \label{sec:hessin-discriminant-of-f-d_f}
-\[ 
+\[
   D_f = 
-  \begin{bmatrix} 
-    f_{xx}&f_{xy}\\
-    f_{yx}&f_{yy}
-  \end{bmatrix} 
-\] 
+  \left|
+  \begin{matrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} & f_{yy}
+  \end{matrix}
+  \right| = f_{xx}\cdot f_{yy} - {f_{xy}}^2
+\]
+Here, at \((a,b)\),
+\[ f_{xy}=f_{yx} \] 
+Since f is continuos at
+\((a,b)\). See \href{def:second-order-partial-derivative}{Clairaut's Theorem}.
 
 \section{Confirming Extremes or Saddle}
 \label{sec:confirming-extremes-or-saddle}
+Check at \((x,y)=(a,b)\).
 
 \begin{align}
   \textbf{Local Maxima }&: f_{xx}<0 \text{ and } D_f
@@ -39,5 +46,16 @@ Then, \((a,b,f(a,b))\) is a saddle point.
   \textbf{Local Minima }&: f_{xx}>0 \text{ and } D_f<0)
   \label{eqn:local-minima-2vf}\\
   \textbf{Saddle }&: f_{xx}=0 \text{ and } D_f<0) \label{eqn:saddle-2vf}\\
-  \textbf{Inconclusive }&:  D_f=0) \label{eqn:inconclusive-2vf}\\
+  \textbf{Inconclusive }&:  D_f=0) \label{eqn:inconclusive-2vf}
 \end{align}
+
+\section{Finding Absolute Extremas}
+\label{sec:finding-absolute-extremas}
+A boundry will be given. To find the extremas,
+\begin{enumerate}
+  \item find all the critical points inside the boundry.
+  \item find all the critical points in the boundry( single variable function)
+  \item Compare the values of the function for all candidates
+  \item List the absolute extremas(points of maximum and minimum value of the
+    function).
+\end{enumerate}
