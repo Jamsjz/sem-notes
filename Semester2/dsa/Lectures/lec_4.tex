@@ -5,21 +5,21 @@ Consider the relative precedence of operations according to \textbf{BODMAS}
 rule. 
 
 \begin{enumerate}
-  \item \textbf{Initialize} an empty stack for operators, \(S\), and an empty output string (or list) for the postfix expression, \(P\).
-  \item \textbf{Scan} the infix expression \(E\) from left to right, one symbol at a time.
-  \item \textbf{For each symbol \(t\) in \(E\):}
-    \begin{enumerate}
-      \item If \(t\) is an \textbf{operand} (letter or digit), append \(t\) to \(P\).
-      \item If \(t = (\), push \(t\) onto \(S\).
-      \item If \(t = )\), pop and append all operators from \(S\) to \(P\) until a left parenthesis \((\) is encountered. Pop and discard the left parenthesis.
-      \item If \(t\) is an \textbf{operator} (\(+\), \(-\), \(*\), \(/\), \(^\)):
-        \begin{enumerate}
-          \item While \(S\) is not empty, and the operator at the top of \(S\) has greater or equal precedence than \(t\) (and is not a left parenthesis), pop from \(S\) and append to \(P\).
-          \item Push \(t\) onto \(S\).
+  \item \textbf{Initialize} an empty stack for operators, \( S \), and an empty output string (or list) for the postfix expression, \( P \).
+  \item \textbf{Scan} the infix expression \( E \) from left to right, one symbol at a time.
+  \item \textbf{For each symbol \( t \) in \( E \):}
+    \begin{enumerate}[label=\alph*)]
+      \item If \( t \) is an \textbf{operand} (letter or digit), append \( t \) to \( P \).
+      \item If \( t = \texttt{(} \), push \( t \) onto \( S \).
+      \item If \( t = \texttt{)} \), pop and append all operators from \( S \) to \( P \) until a left parenthesis \texttt{(} is encountered. Pop and discard the left parenthesis.
+      \item If \( t \) is an \textbf{operator} (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{\^{}}):
+        \begin{enumerate}[label=\roman*)]
+          \item While \( S \) is not empty, and the operator at the top of \( S \) has greater or equal precedence than \( t \) (and is not a left parenthesis), pop from \( S \) and append to \( P \).
+          \item Push \( t \) onto \( S \).
         \end{enumerate}
     \end{enumerate}
-  \item \textbf{After scanning} the entire infix expression, pop and append any remaining operators from \(S\) to \(P\).
-  \item The output \(P\) is the postfix expression.
+  \item \textbf{After scanning} the entire infix expression, pop and append any remaining operators from \( S \) to \( P \).
+  \item The output \( P \) is the postfix expression.
 \end{enumerate}
 
 \textbf{We define functions to handle precedence prehand and functions for handling expressions.}
