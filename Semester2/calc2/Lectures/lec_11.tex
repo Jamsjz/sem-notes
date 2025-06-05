@@ -20,10 +20,10 @@ and if,
 f(x,y)<f(a,b) \text{ elsewhere }\]
 Then, \((a,b,f(a,b))\) is a saddle point.
 
-\section{Hessin/Discriminant of \(f\): \(D_f\)}
-\label{sec:hessin-discriminant-of-f-d_f}
+\section{Hessian/Discriminant of \(f\): \(D_f\)}
+\label{sec:hessian-discriminant-of-f-d_f}
 \[
-  D_f = 
+  \mid \textbf{H}_f \mid  = 
   \left|
   \begin{matrix}
     f_{xx} & f_{xy} \\
@@ -31,6 +31,9 @@ Then, \((a,b,f(a,b))\) is a saddle point.
   \end{matrix}
   \right| = f_{xx}\cdot f_{yy} - {f_{xy}}^2
 \]
+where \(\textbf{H}_f\) is the \emph{Hesian Matrix} of \(f\) such that:
+\[ (\textbf{H}_f)_{ij} = \frac{\partial^2 f}{\partial x_{i}\partial x_{j}}  \] 
+
 Here, at \((a,b)\),
 \[ f_{xy}=f_{yx} \] 
 Since f is continuos at
