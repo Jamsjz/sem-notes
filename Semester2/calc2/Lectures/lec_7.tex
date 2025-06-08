@@ -64,12 +64,13 @@
 \end{figure}
 
 For the \(k^{th}\) sector the area of the sector is:
-\[ A_{k} = \frac{1}{2} r_{k}^2\theta \]
+\[ A_{k} = \frac{1}{2} r_{k}^2\Delta\theta \]
 Then the area of all the sectors is:
 \[\sum_{k=1}^{n} A_{k}\]
 Then replacing the summation with limit as \(n\to \infty\) then, the area
 bounded by the curve is:
-\[ A = \int_{\alpha}^{\beta}A_{k} \] 
+\[ A = \lim_{n \to \infty} \sum_{k=1}^{n} A_{k} =\int_{\alpha}^{\beta}
+\frac{1}{2}r^2d\theta \] 
 
 \begin{remark}[Main Point]
   We need to know what the \(\alpha\) and \(\beta\) is.\\
