@@ -1,0 +1,84 @@
+\chapter{Double Integrals in Polar Form}
+\label{chap:double-integrals-in-polar-form}
+
+\section{Double Integrals}
+\label{sec:double-integrals-polar-form}
+
+\begin{definition}[Double Integral in Polar Coordinates]
+  \label{def:polar-double-integral}
+  If \(f(x,y)\) is continuous on a region \(R\), and we convert to polar coordinates using:
+  \[
+    x = r\cos\theta, \quad y = r\sin\theta
+  \]
+  then the double integral becomes:
+  \begin{equation}\label{eq:polar-double-integral}
+    \iint_R f(x,y)\,dx\,dy = \iint_R f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta
+  \end{equation}
+\end{definition}
+
+\begin{remark}[Why \(r\) Appears]
+  The extra factor \(r\) accounts for the Jacobian determinant when changing from rectangular to polar coordinates.
+\end{remark}
+
+\section{Relating the Double Integrals in Cartesian and Polar Forms}
+\label{sec:relating-the-double-integrals-in-cartesian-and-polar-forms}
+
+\begin{equation}\label{eq:jacobian-cartesian-polar}
+  dx\,dy = r\,dr\,d\theta
+\end{equation}
+
+\begin{explanation}[Jacobian of the Transformation]
+  The Jacobian determinant for the transformation from \((x,y)\) to \((r,\theta)\) is:
+  \[
+    J = \left| \frac{\partial(x,y)}{\partial(r,\theta)} \right| = 
+    \begin{vmatrix}
+      \cos\theta & -r\sin\theta \\
+      \sin\theta & r\cos\theta
+    \end{vmatrix}
+    = r
+  \]
+  Hence, \(dx\,dy = r\,dr\,d\theta\).
+\end{explanation}
+
+\section{Converting Double Integrals from Cartesian to Polar Forms}
+\label{sec:converting-double-integrals-from-cartesian-to-polar-forms}
+
+\begin{exercise}
+  Convert the integral
+  \[
+    \int_{-1}^{1} \int_{0}^{\sqrt{1-x^2}} 1\,dy\,dx
+  \]
+  to polar form.
+\end{exercise}
+
+\begin{answer}[Converting Circle Integral to Polar Form]
+  The given region is the upper half of the unit disk:
+  \[
+    R = \{ (x,y): -1 \le x \le 1, 0 \le y \le \sqrt{1 - x^2} \}
+  \]
+  This corresponds to:
+  \[
+    R = \{ (r,\theta): 0 \le r \le 1,\ 0 \le \theta \le \pi \}
+  \]
+
+  Converting the integral:
+  \begin{align*}
+    \int_{-1}^{1} \int_{0}^{\sqrt{1-x^2}} 1\,dy\,dx 
+    &= \iint_R 1\,dx\,dy \\
+    &= \int_0^{\pi} \int_0^1 1 \cdot r\,dr\,d\theta \\
+    &= \int_0^{\pi} \left[ \frac{1}{2}r^2 \right]_0^1 d\theta \\
+    &= \int_0^{\pi} \frac{1}{2}\,d\theta = \left[ \frac{1}{2}\theta \right]_0^{\pi} = \frac{\pi}{2}
+  \end{align*}
+\end{answer}
+
+\begin{remark}[When to Use Polar Coordinates]
+  Use polar form when the region is circular or radial symmetry is present, as integration becomes simpler.
+\end{remark}
+
+\begin{proof}[Equivalence of Cartesian and Polar Forms]
+  Let \(R\) be a region described easily in polar coordinates. Then:
+  \[
+    \iint_R f(x,y)\,dx\,dy = \iint_R f(r\cos\theta, r\sin\theta)\cdot r\,dr\,d\theta
+  \]
+  This is justified by the substitution rule in multiple integrals and the Jacobian determinant of the coordinate transformation.
+\end{proof}
