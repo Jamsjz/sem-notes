@@ -1,0 +1,510 @@
+<!doctype html>
+<!-- skfj -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semester Notes</title>
+  <script type="module">
+    import { Octokit } from "https://esm.sh/@octokit/rest";
+
+    const octokit = new Octokit();
+    const owner = "jamsjz";
+    const repo = "sem-notes";
+    const contentDiv = document.getElementById("content");
+
+    async function fetchSemesters() {
+      try {
+        contentDiv.innerHTML =
+          '<div class="loading"><div class="spinner"></div><p>Loading semester notes...</p></div>';
+
+        const { data: rootContents } = await octokit.repos.getContent({
+          owner,
+          repo,
+          path: "",
+        });
+
+        const semesters = rootContents
+          .filter(
+            (item) => item.type === "dir" && item.name.startsWith("Semester"),
+          )
+          .sort((a, b) => {
+            const numA = parseInt(a.name.replace("Semester", ""));
+            const numB = parseInt(b.name.replace("Semester", ""));
+            return numA - numB;
+          });
+
+        contentDiv.innerHTML = "";
+
+        for (const semester of semesters) {
+          const semesterDiv = document.createElement("div");
+          semesterDiv.className = "semester-card";
+
+          const semTitle = document.createElement("h2");
+          semTitle.innerHTML = `
+                        <span class="semester-number">${semester.name.replace("Semester", "")}</span>
+                        ${semester.name}
+                    `;
+          semesterDiv.appendChild(semTitle);
+
+          const subjectsContainer = document.createElement("div");
+          subjectsContainer.className = "subjects-grid";
+
+          try {
+            const { data: subjects } = await octokit.repos.getContent({
+              owner,
+              repo,
+              path: semester.path,
+            });
+
+            let subjectCount = 0;
+
+            for (const subject of subjects) {
+              if (subject.type !== "dir") continue;
+
+              try {
+                const { data: files } = await octokit.repos.getContent({
+                  owner,
+                  repo,
+                  path: subject.path,
+                });
+
+                const mainPdf = files.find((file) => file.name.toLowerCase().endsWith(".pdf"));
+
+
+                if (mainPdf) {
+                  const subjectDiv = document.createElement("div");
+                  subjectDiv.className = "subject-card";
+                  subjectDiv.onclick = () => {
+                    const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(mainPdf.download_url)}&embedded=true`;
+
+                    // Create modal elements
+                    const modal = document.createElement("div");
+                    modal.style.position = "fixed";
+                    modal.style.top = 0;
+                    modal.style.left = 0;
+                    modal.style.width = "100vw";
+                    modal.style.height = "100vh";
+                    modal.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                    modal.style.zIndex = 1000;
+                    modal.style.display = "flex";
+                    modal.style.flexDirection = "column";
+                    modal.style.alignItems = "center";
+                    modal.style.justifyContent = "center";
+
+                    const iframe = document.createElement("iframe");
+                    iframe.src = viewerUrl;
+                    iframe.style.width = "90vw";
+                    iframe.style.height = "80vh";
+                    iframe.style.border = "none";
+                    iframe.style.borderRadius = "10px";
+
+                    const downloadBar = document.createElement("div");
+                    downloadBar.style.marginTop = "1rem";
+                    downloadBar.innerHTML = `<a href="${mainPdf.download_url}" download style="background: #667eea; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold;">Download PDF</a> <button id="closeModal" style="margin-left: 10px; padding: 10px 15px; background: #ff5e5e; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Close</button>`;
+
+                    modal.appendChild(iframe);
+                    modal.appendChild(downloadBar);
+                    document.body.appendChild(modal);
+
+                    document.getElementById("closeModal").onclick = () => {
+                      modal.remove();
+                    };
+                  };
+
+                  subjectDiv.innerHTML = `
+                                        <div class="pdf-icon">
+                                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                                            </svg>
+                                        </div>
+                                        <div class="subject-info">
+                                            <h3>${subject.name}</h3>
+                                            <p>PDF Available</p>
+                                        </div>
+                                        <div class="arrow-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                            </svg>
+                                        </div>
+                                    `;
+
+                  subjectsContainer.appendChild(subjectDiv);
+                  subjectCount++;
+                }
+              } catch (err) {
+                console.warn(`Could not load subject: ${subject.name}`, err);
+              }
+            }
+
+            if (subjectCount > 0) {
+              const countBadge = document.createElement("span");
+              countBadge.className = "subject-count";
+              countBadge.textContent = `${subjectCount} subjects`;
+              semTitle.appendChild(countBadge);
+
+              semesterDiv.appendChild(subjectsContainer);
+              contentDiv.appendChild(semesterDiv);
+            }
+          } catch (err) {
+            console.warn(`Could not load semester: ${semester.name}`, err);
+          }
+        }
+
+        if (contentDiv.children.length === 0) {
+          contentDiv.innerHTML =
+            '<div class="error">No semester folders with PDFs found in the repository.</div>';
+        }
+      } catch (err) {
+        contentDiv.innerHTML =
+          '<div class="error">Failed to load repository contents. Please check the repository URL.</div>';
+        console.error(err);
+      }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", fetchSemesters);
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%);
+      color: #e0e6ed;
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+      }
+
+      to {
+        filter: drop-shadow(0 0 30px rgba(118, 75, 162, 0.6));
+      }
+    }
+
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(102, 126, 234, 0.2);
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .semester-card {
+      background: linear-gradient(145deg, #1e2139 0%, #2a2d5a 100%);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .semester-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(102, 126, 234, 0.5),
+          transparent);
+    }
+
+    .semester-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(102, 126, 234, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .semester-card h2 {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .semester-number {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 900;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .subject-count {
+      background: rgba(102, 126, 234, 0.2);
+      color: #a5b4fc;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-left: auto;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(145deg, #252847 0%, #1f1f3a 100%);
+      border-radius: 15px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subject-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(102, 126, 234, 0.1),
+          transparent);
+      transition: left 0.5s ease;
+    }
+
+    .subject-card:hover::before {
+      left: 100%;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: rgba(102, 126, 234, 0.4);
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(102, 126, 234, 0.2);
+    }
+
+    .pdf-icon {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .pdf-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .subject-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .subject-info h3 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .subject-info p {
+      color: #a5b4fc;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .arrow-icon {
+      color: #6b7280;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .arrow-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .subject-card:hover .arrow-icon {
+      color: #667eea;
+      transform: translateX(5px);
+    }
+
+    .error {
+      background: linear-gradient(145deg, #3f1f1f 0%, #5f1f1f 100%);
+      color: #ff9999;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255, 99, 99, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .semester-card {
+        padding: 1.5rem;
+      }
+
+      .semester-card h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .subject-card {
+        padding: 1rem;
+      }
+
+      .pdf-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .pdf-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .semester-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .subject-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+        text-align: left;
+      }
+
+      .arrow-icon {
+        align-self: flex-end;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a1a2e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>📚 Semester Notes</h1>
+  <div id="content">Loading...</div>
+  <a href="https://plex.it/referrals/FR4EL772">Get one month of perplexity pro for free!!!</a>
+</body>
+
+</html>
