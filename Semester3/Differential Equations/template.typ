@@ -1,6 +1,5 @@
 #import "plot.typ": *
 #import "@preview/fletcher:0.5.8" as fl
-#import "@preview/itemize:0.1.1" as el
 #import "@preview/equate:0.3.2": equate
 #import "@preview/drafting:0.2.2": *
 #import "@preview/deckz:0.2.0": render as card
@@ -29,9 +28,8 @@
   let sans-font = "New Computer Modern Sans"
 
   // Set body font family.
-  set text(font: body-font, lang: "en", size: 12pt)
+  set text(lang: "en", size: 12pt)
   show math.equation: set text(weight: 400)
-  show heading: set text(font: sans-font)
   set heading(numbering: "1.1")
 
   // Title page.
@@ -44,7 +42,7 @@
 
   text(1.1em, date)
   v(1.2em, weak: true)
-  text(font: sans-font, 2em, weight: 700, title)
+  text(size: 2em, weight: 700, title)
 
   // Author information.
   pad(
@@ -62,7 +60,7 @@
 
   // Abstract page.
   v(1fr)
-align(center)[
+  align(center)[
     #heading(
       outlined: false,
       numbering: none,
@@ -79,8 +77,6 @@ align(center)[
 
 
   // Main body.
-  show ref: el.ref-enum
-  show: el.default-enum-list
   show: equate.with(breakable: true, sub-numbering: true)
   set math.equation(numbering: "(1.1)")
   set enum(numbering: "1.a).(i)", full: true)
