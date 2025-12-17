@@ -40,11 +40,11 @@ This distribution can be modeled by
 $ overline(X_1) - overline(X_2) ~ N(mu_1-mu_2, sigma_1^2/n+sigma_2^2/n) $
 where,\
 $mu_(overline(X_1) - overline(X_2) = mu_1 - mu_2)$ \
-$sigma_(overline(X_1) - overline(X_2) = sigma_1^2/n+sigma_2^2/n)$
+$sigma_(overline(X_1) - overline(X_2) = sqrt(sigma_1^2/n+sigma_2^2/n))$
 
 == Sampling Distribution of Difference Between Sample Proportion
 This distribution can be modeled by
 $ p_1 - p_2 ~ N(P_1-P_2, (P_1Q_1)/n_1 + (P_2Q_2)/n_2 ) $
 where,\
 $mu_(p_1-p_2) = P_1-P_2$ \
-$sigma_(p_1-p_2) = (P_1Q_1)/n_1 + (P_2Q_2)/n_2$
+$sigma_(p_1-p_2) = sqrt((P_1Q_1)/n_1 + (P_2Q_2)/n_2)$

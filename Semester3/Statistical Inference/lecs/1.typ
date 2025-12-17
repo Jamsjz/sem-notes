@@ -104,6 +104,7 @@ $ f(x) = 1/sqrt(2pi) e^(-1/2 z^2) $
 The finite population correction factor (FPC) is a correction factor
 used to correct the standard error when sampling where the sample size is
 less than 5% of the total population.
+$"FPC" = (N-n)/(n-1)$
 
 #important-box(title: "Sampling Distribution of finite population")[
   The sampling distribution of sample mean, $overline(X) ~ N(mu, sigma^2/n ( N-n )/(n-1))$
